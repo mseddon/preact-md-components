@@ -173,15 +173,40 @@ button:focus {
     background-color: #fff;
     opacity: 0.0;
     transform: scale(1);
-    transition:  transform cubic-bezier(.4,0,.2,1) 0.4s;
+    pointer-events: none;
 }
 
 .ripple.zoom {
-    opacity: 0.4;
-    transform: scale(100);
+    animation-name: ripple-zoom;
+    animation-duration: 0.4s;
+    animation-fill-mode: forwards;
 }
 
-.ripple.out {
-    transition:  opacity cubic-bezier(.4,0,.2,1) 0.4s;
+@keyframes ripple-zoom {
+    from {
+        opacity: 0.4;
+        transform: scale(1);
+    }
+
+    to {
+        opacity: 0.4;
+        transform: scale(100);
+    }
+}
+@keyframes ripple-fade {
+    from {
+        transform: scale(100);
+        opacity: 0.4;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+.ripple.fade {
+    animation-name: ripple-fade;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
     opacity: 0;
 }

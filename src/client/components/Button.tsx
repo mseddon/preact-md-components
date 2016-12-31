@@ -16,9 +16,19 @@ export class Button extends Component<{title: string, onClick: () => void}, {}> 
             event.preventDefault()
         }
         this.ripple.classList.add("zoom")
+        this.ripple.classList.remove("fade")
+    }
+    resetRipple = (event: MouseEvent|TouchEvent) => {
+        this.ripple.classList.remove("zoom")
+        this.ripple.classList.add("fade")
     }
     render() {
-        return <button onMouseDown={this.triggerRipple} onTouchStart={this.triggerRipple}>{this.props.title}
+        return <button onMouseDown={this.triggerRipple}
+                       onMouseUp={this.resetRipple}
+                       onTouchStart={this.triggerRipple}
+                       onTouchEnd={this.resetRipple}
+
+                       >{this.props.title}
                  <div className="ripple-box">
                    <span ref={this.storeRipple} className="ripple"/>
                  </div>
