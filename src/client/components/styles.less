@@ -1,0 +1,187 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500');
+@import url('https://fonts.googleapis.com/css?family=Material+Icons');
+
+@primaryColor: #3f51b5;
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+* {
+    font-family: Roboto, sans-serif;
+    box-sizing: border-box;
+}
+
+
+header {
+    background-color: @primaryColor;
+    color: #fff;
+    padding: 16px;
+
+    h1 {
+        display: inline;
+        padding: 0;
+        margin: 0;        
+        font-size: 18px;
+        line-height: 24px;
+        font-weight: normal;
+        vertical-align: middle;
+        padding-left: 40px;
+    }
+
+    i {
+        line-height: 24px;
+        vertical-align: middle
+    }
+
+    box-shadow: 0 2px 5px rgba(0,0,0,.26);
+}
+
+.mdl-field {
+    max-width: 100%;
+    position: relative;
+    line-height: 24px;
+    input {
+        color: #757575;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+        line-height: 24px;
+        font-size: 16px;
+        border: none;
+        width: 100%;
+    }
+
+    border-bottom: 1px solid rgba(0,0,0,.12);
+
+    label {
+        color: rgba(0,0,0,.26);
+        line-height: 24px;
+        padding: 0;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        pointer-events: none;
+        font-size: 16px;
+        width: 100%;
+        transition: cubic-bezier(.4,0,.2,1) .2s;
+        transform: translateY(0px);
+        transform-origin: 0% 0%;
+    }
+
+    .underline:after {
+        display: inline-block;
+        position: absolute;
+        background-color: @primaryColor;
+        bottom: -1px;
+        height: 2px;
+        content: '';
+        left: 45%;
+        width: 20px;
+        transition: cubic-bezier(.4,0,.2,1) .2s;
+        visibility: hidden;
+    }
+
+    span.underline {
+        line-height: 24px;
+        padding: 0;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        pointer-events: none;
+        width: 100%;
+    }
+}
+
+.mdl-field.floating-label {
+    padding-top: 24px;
+    label {
+        padding-top: 24px;
+    }
+}
+
+.mdl-field.is-focused {
+    span.underline:after {
+        left: 0;
+        width: 100%;
+        visibility: visible;
+    }
+}
+
+
+.mdl-field.has-content, .mdl-field.is-focused {
+    label {
+        display: none;
+    }
+}
+
+.mdl-field.floating-label.has-content, .mdl-field.floating-label.is-focused {
+    label {
+        transform: translateY(-18px);
+        color: @primaryColor;
+        font-size: 12px;
+        display: inline-block
+    }
+}
+
+input:focus {
+    outline: none;
+}
+
+.disable-animation * {
+    transition: none !important;
+}
+
+button {
+    border-radius: 2px;
+    text-transform: uppercase;
+    padding: 0 16px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    line-height: 36px;
+    vertical-align: middle;
+    border: none;
+    background-color: @primaryColor;
+    color: #fff;
+    position: relative;
+}
+
+button:focus {
+    outline: none;
+}
+
+.ripple-box {
+    overflow: hidden;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    left: 0px;
+    top: 0px;
+    width: 24px;
+    height: 24px;
+    background-color: #fff;
+    opacity: 0.0;
+    transform: scale(1);
+    transition:  transform cubic-bezier(.4,0,.2,1) 0.4s;
+}
+
+.ripple.zoom {
+    opacity: 0.4;
+    transform: scale(100);
+}
+
+.ripple.out {
+    transition:  opacity cubic-bezier(.4,0,.2,1) 0.4s;
+    opacity: 0;
+}

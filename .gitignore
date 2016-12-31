@@ -1,0 +1,9 @@
+node_modules
+www/bundle.js
+www/bundle.js.gz
+www/bundle.js.map
+doc
+build
+.vscode
+*~
+.idea
