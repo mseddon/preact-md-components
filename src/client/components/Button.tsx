@@ -1,4 +1,5 @@
 import { h, Component } from "preact";
+import "./styles.less";
 
 export class Button extends Component<{title: string, onClick: () => void}, {}> {
     ripple: HTMLElement;

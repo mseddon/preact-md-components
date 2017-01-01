@@ -1,4 +1,5 @@
 import { h, Component } from "preact";
+import "./styles.less";
 
 export class TextField extends Component<{prompt: string, value: string, floatingLabel?: boolean}, {focused: boolean, value: string}> {
     constructor(props) {

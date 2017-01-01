@@ -3,6 +3,8 @@ import { createStore, combineReducers, Store } from 'redux';
 import { Header } from "./components/Header"
 import { TextField } from "./components/TextField"
 import { Button } from "./components/Button"
+import { Checkbox } from "./components/Checkbox"
+
 function makeStore(reducer) {
     if(process.env["DEBUG"])
         return createStore(reducer, window["__REDUX_DEVTOOLS_EXTENSION__"] && window["__REDUX_DEVTOOLS_EXTENSION__"]());
@@ -15,8 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if(process.env["DEBUG"])
         require('preact/devtools')
     render(<div><Header title="Hello!"/>
-             <TextField prompt="Hello" floatingLabel={false} value=""/>
+             <TextField prompt="Hello" floatingLabel={true} value=""/>
              <Button title="Button" onClick={null}/>
+             <Checkbox title="Wee"/>
            </div>, document.querySelector("#content"))
     document.body.classList.remove("disable-animation");
 })
