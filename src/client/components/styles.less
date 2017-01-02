@@ -3,6 +3,12 @@
 
 @primaryColor: #3f51b5;
 
+// Initially the body has this css class, to prevent weird animation affects as the css is injected into the page.
+.disable-animation * {
+    transition: none !important;
+}
+
+
 body {
     margin: 0;
     padding: 0;
@@ -129,10 +135,6 @@ header {
 
 input:focus {
     outline: none;
-}
-
-.disable-animation * {
-    transition: none !important;
 }
 
 button {
