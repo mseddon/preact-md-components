@@ -7,6 +7,6 @@ interface HeaderProps {
 
 export class Header extends Component<HeaderProps, any> {
     render() {
-        return <header><i class="material-icons">menu</i><h1>{this.props.title}</h1></header>
+        return <header><span class="md-icon-hamburger"/><h1>{this.props.title}</h1></header>
     }
 }

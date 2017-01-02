@@ -20,7 +20,7 @@ export class TextField extends Component<{prompt: string, value: string, floatin
     }
 
     render() {
-        return <div class={"mdl-field "+(this.props.floatingLabel ? "floating-label " : "")+ (this.state.focused ? " is-focused" : "") + (this.state.value !== "" ? " has-content" : "")}>
+        return <div class={"md-field "+(this.props.floatingLabel ? "floating-label " : "")+ (this.state.focused ? " is-focused" : "") + (this.state.value !== "" ? " has-content" : "")}>
                  <input value={this.state.value} onFocus={this.setFocus} onBlur={this.clearFocus} onInput={this.updateInput}/>
                  <label className={this.state.value === "" ? "show-prompt" : "no-prompt"}>{this.props.prompt}</label>
                  <span className="underline"></span>
