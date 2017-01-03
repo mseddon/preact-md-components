@@ -4,6 +4,7 @@ import { AppBar } from "./components/AppBar"
 import { TextField } from "./components/TextField"
 import { Button } from "./components/Button"
 import { Checkbox } from "./components/Checkbox"
+import { Switch } from "./components/Switch"
 import { RadioButton } from "./components/RadioButton"
 
 function makeStore(reducer) {
@@ -21,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
              <TextField prompt="Hello" floatingLabel={true} value=""/>
              <Button title="Button" onClick={null}/>
              <Checkbox title="Wee"/>
+             <Switch title="Wee"/>
              <RadioButton name="buttons" title="Radio 1" value="1"/>
              <RadioButton name="buttons" title="Radio 2" value="2"/>
            </div>, document.querySelector("#content"))

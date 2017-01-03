@@ -1,7 +1,7 @@
 Toggles:
     *Checkbox
     *RadioButton
-     Switch
+    *Switch
 
 Progress:
     ProgressBar
@@ -10,6 +10,8 @@ Progress:
     Spinner
     
 Tabs
+
+Slider
 
 Menus
 
