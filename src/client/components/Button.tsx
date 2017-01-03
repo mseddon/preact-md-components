@@ -4,8 +4,6 @@ import { RippleBox } from "./RippleBox"
 
 export class Button extends Component<{title: string, onClick: () => void}, {}> {
     render() {
-        return <button>{this.props.title}
-                 <RippleBox/>
-               </button>
+        return <div class="md-button"><button>{this.props.title}</button><RippleBox/></div>
     }
 }

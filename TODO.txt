@@ -1,7 +1,6 @@
 Toggles:
     *Checkbox
     *RadioButton
-     Icon
      Switch
 
 Progress:

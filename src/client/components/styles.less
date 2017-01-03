@@ -16,6 +16,7 @@ body {
 * {
     font-family: Roboto, sans-serif;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 
@@ -136,29 +137,39 @@ input:focus {
     outline: none;
 }
 
-button {
-    user-select: none;
-    border-radius: 2px;
-    text-transform: uppercase;
-    padding: 0 16px;
-    font-size: 14px;
-    font-weight: 500;
-    text-decoration: none;
-    line-height: 36px;
-    vertical-align: middle;
-    border: none;
-    background-color: @primaryColor;
-    color: #fff;
+.md-button {
+    display: inline-block;
     position: relative;
-}
+    button {
+        user-select: none;
+        border-radius: 2px;
+        text-transform: uppercase;
+        padding: 0 16px;
+        font-size: 14px;
+        font-weight: 500;
+        text-decoration: none;
+        line-height: 36px;
+        vertical-align: middle;
+        border: none;
+        background-color: @primaryColor;
+        color: #fff;
+        position: relative;
+    }
 
-button:focus {
-    outline: none;
+    button:focus {
+        outline: none;
+    }
+
+    button:active {
+        border: none;
+        outline: none;
+    }
 }
 
 .ripple-box {
     overflow: hidden;
     position: absolute;
+    z-index: 1;
     top: 0px;
     left: 0px;
     width: 100%;
