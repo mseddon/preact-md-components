@@ -1,13 +1,17 @@
 Toggles:
-    Checkbox
-    RadioButton
-    Icon
-    Switch
+    *Checkbox
+     RadioButton
+     Icon
+     Switch
 
 Progress:
     ProgressBar
-    IndeterminateProgress
-
+        Indeterminate
+        Buffer
+    Spinner
+    
 Tabs
+
+Menus
 
 Snackbar
