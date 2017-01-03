@@ -19,7 +19,6 @@ export class RippleBox extends Component<{extraClasses?: string, rippleColor?: s
             let touch = event.changedTouches.item(0)
             this.ripple.style.left = (touch.clientX-12)+"px"
             this.ripple.style.top = (touch.clientY-12)+"px"
-            event.preventDefault()
             window.addEventListener("touchend", this.resetRipple);
         }
         this.ripple.classList.add("zoom")

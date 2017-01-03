@@ -1,6 +1,6 @@
 Toggles:
     *Checkbox
-     RadioButton
+    *RadioButton
      Icon
      Switch
 
