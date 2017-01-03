@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,500');
 
-@primaryColor: #3f51b5;
+@indigo: #3f51b5;
+@primaryColor: @indigo;
 
 .no-user-select {
     user-select: none;
@@ -10,6 +11,7 @@
 }
 
 // Initially the body has this css class, to prevent weird animation affects as the css is injected into the page.
+// You should remove this class after your first render.
 .disable-animation * {
     transition: none !important;
 }
@@ -27,7 +29,7 @@ body {
 }
 
 
-header {
+.md-app-bar {
     background-color: @primaryColor;
     color: #fff;
     padding: 16px;
@@ -389,4 +391,141 @@ input:focus {
     height: 24px;
     background: url("data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjRkZGRkZGIiBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSIyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxwYXRoIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz4KICAgIDxwYXRoIGQ9Ik0zIDE4aDE4di0ySDN2MnptMC01aDE4di0ySDN2MnptMC03djJoMThWNkgzeiIvPgo8L3N2Zz4=");
     background-size: cover;
+}
+
+.md-progress-bar {
+    width: 500px;
+    max-width: 100%;
+    position: relative;
+
+    display: inline-block;
+    height: 4px;
+
+    .progress {
+        background-color: @primaryColor;
+        position: absolute;
+        height: 100%;
+        left: 0; top: 0;
+    }
+
+    .background {
+        position: absolute;
+        height: 100%;
+        left: 0; top: 0;
+        background-color: lighten(@primaryColor, 30%);
+    }
+
+    .buffer {
+        position: absolute;
+        height: 100%;
+        top: 0;
+        right: 0;
+
+
+        background: radial-gradient(lighten(@primaryColor, 40%) 0%, lighten(@primaryColor, 40%) 29%, rgba(0,0,0,0) 29.01%, rgba(0, 0, 0, 0) 100%);
+        background-repeat: repeat;
+        background-size: 10px 10px;
+        background-position: 0px;
+        animation: buffering 1s infinite linear;
+    }
+}
+
+.md-progress-bar.indeterminate {
+    .progress {
+        animation: indeterminate-progress 2s infinite linear running;
+    }
+
+    .buffer {
+        display: none;
+    }
+}
+
+@keyframes buffering {
+    0% {
+        background-position: 0;
+    }
+
+    100% {
+        background-position: -20px;
+    }
+}
+
+@keyframes indeterminate-progress {
+  0% {
+    left: 0%;
+    width: 0%;
+  }
+
+  50% {
+    left: 25%;
+    width: 75%;
+  }
+  
+  75% {
+    left: 100%;
+    width: 0%;
+  }
+
+  // snap to start using degenerate keyframe
+  100% {
+    left: 100%;
+    width: 0%;
+  }
+
+  100% {
+      left: 0%;
+      width: 0%;
+  }
+}
+
+.md-spinner {
+    width: 28px;
+    height: 28px;
+
+    display: inline-block;
+    position: relative;
+
+    .spinner-layer {
+        &.spinner-1 {
+            border-color: #42a5f5;
+        }
+        position: absolute;
+        width: 100%;
+        height: 100%;
+
+        .spinner-circle {
+            width: 200%;
+            height: 100%;
+            border-radius: 50%;
+            border-width: 3px;
+            border-style: solid;
+            border-color: inherit;
+            border-bottom-color: transparent;
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+        }
+        .clipper {
+            display: inline-block;
+            position: relative;
+            border-color: inherit;
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+        }
+        .left {
+            float: left;
+            .spinner-circle {
+                border-left-color: transparent;
+                transform: rotate(129deg);
+            }
+        }
+        .right {
+            float: right;
+            .spinner-circle {
+                left: -100%;
+                border-right-color: transparent;
+                transform: rotate(-129deg);
+            }
+        }
+    }
 }

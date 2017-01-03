@@ -1,13 +1,14 @@
-Toggles:
+*Toggles:
     *Checkbox
     *RadioButton
     *Switch
 
-Progress:
-    ProgressBar
-        Indeterminate
-        Buffer
-    Spinner
+*Progress:
+    *ProgressBar
+        *Indeterminate
+        *Buffer
+    *Spinner
+        | only works in chrome+ff so.. that's crap
     
 Tabs
 
