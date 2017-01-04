@@ -8,7 +8,6 @@
         *Indeterminate
         *Buffer
     *Spinner
-        | only works in chrome+ff so.. that's crap
     
 Tabs
 

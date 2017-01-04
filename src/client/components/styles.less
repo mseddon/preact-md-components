@@ -1,7 +1,22 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,500');
 
+/***** Variable section- should probably be in a config.less or similar. *****/
+
 @indigo: #3f51b5;
 @primaryColor: @indigo;
+
+
+@animation-curve-fast-out-slow-in: cubic-bezier(0.4, 0, 0.2, 1);
+
+// Spinner
+
+@spinnerArcSize: 270deg;
+@spinnerArcTime: 1333ms;
+@spinnerArcStartRot: 216deg;
+@spinnerDuration: 360 * @spinnerArcTime / (@spinnerArcStartRot + (360deg - @spinnerArcSize));
+
+
+                    /***** Main stylesheet . *****/
 
 .no-user-select {
     user-select: none;
@@ -15,7 +30,6 @@
 .disable-animation * {
     transition: none !important;
 }
-
 
 body {
     margin: 0;
@@ -485,13 +499,37 @@ input:focus {
     display: inline-block;
     position: relative;
 
+    animation: spinner-outer-rotate @spinnerDuration linear infinite;
+
     .spinner-layer {
-        &.spinner-1 {
-            border-color: #42a5f5;
-        }
         position: absolute;
         width: 100%;
         height: 100%;
+        // opacity: 0
+
+        &.spinner-1 {
+            border-color: #42a5f5;
+            animation: spinnner-fill-unfill-rotate (4*@spinnerArcTime) @animation-curve-fast-out-slow-in infinite both,
+                       spinner-1-fade-in-out (4*@spinnerArcTime) @animation-curve-fast-out-slow-in infinite both; 
+        }
+
+        &.spinner-2 {
+            border-color: #f44336;
+            animation: spinnner-fill-unfill-rotate (4*@spinnerArcTime) @animation-curve-fast-out-slow-in infinite both,
+                       spinner-2-fade-in-out (4*@spinnerArcTime) @animation-curve-fast-out-slow-in infinite both; 
+        }
+
+        &.spinner-3 {
+            border-color: #fdd835;
+            animation: spinnner-fill-unfill-rotate (4*@spinnerArcTime) @animation-curve-fast-out-slow-in infinite both,
+                       spinner-3-fade-in-out (4*@spinnerArcTime) @animation-curve-fast-out-slow-in infinite both; 
+        }
+
+        &.spinner-4 {
+            border-color: #4caf50;
+            animation: spinnner-fill-unfill-rotate (4*@spinnerArcTime) @animation-curve-fast-out-slow-in infinite both,
+                       spinner-4-fade-in-out (4*@spinnerArcTime) @animation-curve-fast-out-slow-in infinite both; 
+        }
 
         .spinner-circle {
             width: 200%;
@@ -514,18 +552,95 @@ input:focus {
         }
         .left {
             float: left;
+            border-right-color: transparent !important;
             .spinner-circle {
-                border-left-color: transparent;
+                animation: spinner-left-spin @spinnerArcTime @animation-curve-fast-out-slow-in infinite both;
                 transform: rotate(129deg);
             }
         }
         .right {
             float: right;
+            border-left-color: transparent !important;
             .spinner-circle {
+                animation: spinner-right-spin @spinnerArcTime @animation-curve-fast-out-slow-in infinite both;
                 left: -100%;
-                border-right-color: transparent;
                 transform: rotate(-129deg);
             }
         }
+        .gap-patch {
+            position: absolute;
+            box-sizing: border-box;
+            top: 0;
+            left: 45%;
+            width: 10%;
+            height: 100%;
+            overflow: hidden;
+            border-color: inherit;
+
+            & .spinner-circle {
+                width: 1000%;
+                left: -450%;
+            }
+        }
     }
+}
+
+@keyframes spinner-outer-rotate {
+  to { transform: rotate(360deg) }
+}
+
+@keyframes spinnner-fill-unfill-rotate {
+  12.5% { transform: rotate(0.5 * @spinnerArcSize);  }
+  25%   { transform: rotate(@spinnerArcSize);  }
+  37.5% { transform: rotate(1.5 * @spinnerArcSize);  }
+  50%   { transform: rotate(2 * @spinnerArcSize);  }
+  62.5% { transform: rotate(2.5 * @spinnerArcSize);  }
+  75%   { transform: rotate(3 * @spinnerArcSize);  }
+  87.5% { transform: rotate(3.5 * @spinnerArcSize); }
+  to    { transform: rotate(4 * @spinnerArcSize); }
+}
+
+@keyframes spinner-left-spin {
+  from { transform: rotate(130deg); }
+  50% { transform: rotate(-5deg); }
+  to { transform: rotate(130deg); }
+}
+
+@keyframes spinner-right-spin {
+  from { transform: rotate(-130deg); }
+  50% { transform: rotate(5deg); }
+  to { transform: rotate(-130deg); }
+}
+
+@keyframes spinner-1-fade-in-out {
+  from { opacity: 0.99; }
+  25% { opacity: 0.99; }
+  26% { opacity: 0; }
+  89% { opacity: 0; }
+  90% { opacity: 0.99; }
+  100% { opacity: 0.99; }
+}
+
+@keyframes spinner-2-fade-in-out {
+  from { opacity: 0; }
+  15% { opacity: 0; }
+  25% { opacity: 0.99; }
+  50% { opacity: 0.99; }
+  51% { opacity: 0; }
+}
+
+@keyframes spinner-3-fade-in-out {
+  from { opacity: 0; }
+  40% { opacity: 0; }
+  50% { opacity: 0.99; }
+  75% { opacity: 0.99; }
+  76% { opacity: 0; }
+}
+
+@keyframes spinner-4-fade-in-out {
+  from { opacity: 0; }
+  65% { opacity: 0; }
+  75% { opacity: 0.99; }
+  90% { opacity: 0.99; }
+  100% { opacity: 0; }
 }
