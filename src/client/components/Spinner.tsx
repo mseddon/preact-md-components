@@ -1,5 +1,6 @@
 import { h, Component, ComponentProps } from "preact";
 import "./styles.less";
+require('../theme');
 
 // Extremely hairy spinner taken from getmdl.io
 

@@ -1,6 +1,7 @@
 import { h, Component } from "preact";
 import "./styles.less";
 import { RippleBox } from "./RippleBox";
+require('../theme');
 
 export class Checkbox extends Component<{title: string, checked?: boolean}, {checked: boolean}> {
     elem: HTMLInputElement
@@ -21,8 +22,8 @@ export class Checkbox extends Component<{title: string, checked?: boolean}, {che
     render() {
         return <label className={"md-checkbox" + (this.state.checked ? " is-checked" : "")}>
                     <input ref={e => this.elem = e as HTMLInputElement} type="checkbox" checked={this.state.checked} onChange={this.updateCheck}/>
-                    <span className="box"><span className="check"/></span>
+                    <span className={"box" + (this.state.checked ? " primary-border" : "")}><span className="primary-bg check"/></span>
                     <span className="label">{this.props.title}</span>
-                    <RippleBox extraClasses="point-ripple invert-primary" /></label>
+                    <RippleBox extraClasses="point-ripple" rippleClass="primary-bg" /></label>
     }
 }

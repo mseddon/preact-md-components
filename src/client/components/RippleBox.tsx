@@ -1,8 +1,9 @@
 import { h, Component } from "preact";
 import "./styles.less";
 import { globalPosition } from "../domutil";
+require('../theme');
 
-export class RippleBox extends Component<{extraClasses?: string, rippleColor?: string}, {}> {
+export class RippleBox extends Component<{extraClasses?: string, rippleClass?: string, rippleColor?: string}, {}> {
     ripple: HTMLElement;
     rippleBox: HTMLElement;
     timer: any;
@@ -45,7 +46,7 @@ export class RippleBox extends Component<{extraClasses?: string, rippleColor?: s
                     ref={x => this.rippleBox = x as HTMLElement}
                     onMouseDown={this.triggerRipple}
                     onTouchStart={this.triggerRipple}>
-                   <span ref={this.storeRipple} className="ripple" style={this.props.rippleColor ? {backgroundColor: this.props.rippleColor} : {}} />
+                   <span ref={this.storeRipple} className={"ripple" + (this.props.rippleClass ? " "+this.props.rippleClass: "")} style={this.props.rippleColor ? {backgroundColor: this.props.rippleColor} : {}} />
                </div>
     }
 }

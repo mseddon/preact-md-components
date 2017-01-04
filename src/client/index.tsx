@@ -9,7 +9,7 @@ import { RadioButton } from "./components/RadioButton"
 import { ProgressBar } from "./components/ProgressBar"
 import { Spinner } from "./components/Spinner"
 import { Slider } from "./components/Slider"
-
+import * as theme from "./theme";
 function makeStore(reducer) {
     if(process.env["DEBUG"])
         return createStore(reducer, window["__REDUX_DEVTOOLS_EXTENSION__"] && window["__REDUX_DEVTOOLS_EXTENSION__"]());
@@ -17,10 +17,10 @@ function makeStore(reducer) {
         return createStore(reducer);
 }
 
-
 document.addEventListener("DOMContentLoaded", () => {
     if(process.env["DEBUG"])
         require('preact/devtools')
+
     render(<div><AppBar title="Hello!"/>
              <TextField prompt="Hello" floatingLabel={true} value=""/>
              <p><Button title="Button" onClick={null}/></p>

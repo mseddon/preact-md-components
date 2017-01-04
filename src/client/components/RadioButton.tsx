@@ -1,6 +1,7 @@
 import { h, Component } from "preact";
 import "./styles.less";
 import { RippleBox } from "./RippleBox";
+require('../theme');
 
 // It's 2017 and HTML is still embarassing.  Use this hack to maintain radio button check updates from the underlying peer. slowly. tsk.
 let radios: RadioButton[] = [];
@@ -23,9 +24,9 @@ export class RadioButton extends Component<{title: string, name: string, value: 
     render() {
         return <label className={"md-radio-button" + (this.state.checked ? " is-checked" : "")}>
                     <input ref={e => this.elem = e as HTMLInputElement} name={this.props.name} type="radio" value={this.props.value} onChange={updateCheck}/>
-                    <span className="radio-circle"/>
-                    <span className="radio-dot"/>
+                    <span className={"radio-circle" + (this.state.checked ? " primary-border" : "")}/>
+                    <span className="radio-dot primary-bg"/>
                     <span className="label">{this.props.title}</span>
-                    <RippleBox extraClasses="point-ripple invert-primary" /></label>
+                    <RippleBox extraClasses="point-ripple" rippleClass="primary-bg" /></label>
     }
 }

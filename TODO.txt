@@ -11,6 +11,8 @@
 
 *Slider
     
+*themes
+
 Tabs
 
 Menus
