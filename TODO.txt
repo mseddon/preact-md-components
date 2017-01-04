@@ -8,11 +8,13 @@
         *Indeterminate
         *Buffer
     *Spinner
+
+*Slider
     
 Tabs
 
-Slider
-
 Menus
+
+Dialog
 
 Snackbar

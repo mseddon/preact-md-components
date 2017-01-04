@@ -8,6 +8,7 @@ import { Switch } from "./components/Switch"
 import { RadioButton } from "./components/RadioButton"
 import { ProgressBar } from "./components/ProgressBar"
 import { Spinner } from "./components/Spinner"
+import { Slider } from "./components/Slider"
 
 function makeStore(reducer) {
     if(process.env["DEBUG"])
@@ -34,6 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
              <p>buffering</p>
              <p><ProgressBar progress={50} buffer={80} /></p>
              <p><Spinner/></p>
+             <p><Slider min={0} max={100} value={50}/></p>
            </div>, document.querySelector("#content"))
     document.body.classList.remove("disable-animation");
 })

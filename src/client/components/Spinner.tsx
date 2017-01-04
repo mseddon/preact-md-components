@@ -1,6 +1,8 @@
 import { h, Component, ComponentProps } from "preact";
 import "./styles.less";
 
+// Extremely hairy spinner taken from getmdl.io
+
 export class Spinner extends Component<any, any> {
     render() {
         return <div className="md-spinner">
