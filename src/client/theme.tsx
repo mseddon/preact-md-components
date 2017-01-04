@@ -1,5 +1,8 @@
 let styles: HTMLStyleElement = document.createElement("style");
 
+let meta: HTMLMetaElement = document.createElement("meta");
+meta.setAttribute("name", "theme-color");
+
 let themeSet = false;
 
 export const INDIGO = [63,81,181] as [number, number, number];
@@ -50,6 +53,8 @@ export function HSVtoRGB([h,s,v]): [number, number, number] {
 export function setTheme(primary: [number, number, number], accent: [number, number, number]) {
     while(styles.firstChild)
         styles.removeChild(styles.firstChild);
+
+    meta.setAttribute("content", "rgb("+primary.join(',')+")");
 
     // FIXME
     //   this should probably be more perception based but will do for now...
@@ -104,4 +109,5 @@ document.addEventListener("DOMContentLoaded", () => {
         themeSet = true;
     }
     document.head.appendChild(styles);
+    document.head.appendChild(meta);
 })
