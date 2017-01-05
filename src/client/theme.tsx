@@ -7,7 +7,7 @@ let themeSet = false;
 
 export const INDIGO = [63,81,181] as [number, number, number];
 export const LIGHT_BLUE = [3,169,244] as [number, number, number];
-
+export const PINK = [233, 30, 99] as [number, number, number];
 
 /** Convert a red/green/blue colour to a hue/saturation/brightness colour. */
 export function RGBtoHSV([r,g,b]): [number, number, number] {
@@ -71,6 +71,7 @@ export function setTheme(primary: [number, number, number], accent: [number, num
     primaryXLightHSV[2] = Math.min(primaryXLightHSV[2]*1.7,1);
 
     let primaryColor = `rgb(${primary.join(',')})`
+    let accentColor = `rgb(${accent.join(',')})`
     let primaryLight = `rgb(${HSVtoRGB(primaryLightHSV).map(x => (x*255)|0).join(',')})`;
     let primaryXLight = `rgb(${HSVtoRGB(primaryXLightHSV).map(x => (x*255)|0).join(',')})`;
 
@@ -97,7 +98,16 @@ export function setTheme(primary: [number, number, number], accent: [number, num
 
     .primary-bg-xlt {
         background-color: ${primaryXLight} !important;
-    }`;
+    }
+    
+    .accent-fg {
+        color: ${accentColor} !important;
+    }
+
+    .accent-bg {
+        background-color: ${accentColor} !important;
+    }
+    `;
 
     let textNode = document.createTextNode(style);
     styles.insertBefore(textNode, styles.firstChild);
@@ -105,7 +115,7 @@ export function setTheme(primary: [number, number, number], accent: [number, num
 
 document.addEventListener("DOMContentLoaded", () => {
     if(!themeSet) {
-        setTheme(INDIGO, [0, 0, 0]);
+        setTheme(INDIGO, PINK);
         themeSet = true;
     }
     document.head.appendChild(styles);

@@ -20,3 +20,7 @@ Menus
 Dialog
 
 Snackbar
+
+Scroll Bar
+
+Draggable Areas
