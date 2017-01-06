@@ -2,8 +2,10 @@ import { h, render } from "preact";
 import { createStore, combineReducers, Store } from 'redux';
 import { AppBar } from "./components/AppBar"
 import { TextField } from "./components/TextField"
+import { Toplevel } from "./components/Toplevel"
 import { Button } from "./components/Button"
 import { IconButton } from "./components/IconButton"
+import { MenuButton } from "./components/MenuButton"
 import { Checkbox } from "./components/Checkbox"
 import { Switch } from "./components/Switch"
 import { RadioButton } from "./components/RadioButton"
@@ -11,8 +13,11 @@ import { ProgressBar } from "./components/ProgressBar"
 import { Spinner } from "./components/Spinner"
 import { Slider } from "./components/Slider"
 import { TabStrip } from "./components/Tabs"
+import { Menu, MenuItem, MenuSeparator } from "./components/Menu"
 import { waitForFonts } from "./domutil";
 import * as theme from "./theme";
+import * as Portal from "preact-portal"
+
 function makeStore(reducer) {
     if(process.env["DEBUG"])
         return createStore(reducer, window["__REDUX_DEVTOOLS_EXTENSION__"] && window["__REDUX_DEVTOOLS_EXTENSION__"]());
@@ -24,7 +29,20 @@ waitForFonts(["Roboto"], () => {
     if(process.env["DEBUG"])
         require('preact/devtools')
 
-    render(<div><AppBar title="Hello!" leftButton={<IconButton iconClass="hamburger"/>} rightButtons={[<IconButton iconClass="more-vert"/>]}/>
+    let menu = <Menu>
+                    <MenuItem label="New"/>
+                    <MenuItem label="Open..."/>
+                    <MenuSeparator/>
+                    <MenuItem label="Close"/>
+                    <MenuItem label="Save"/>
+                    <MenuItem label="Save As..."/>
+                    <MenuSeparator/>
+                    <MenuItem label="Sign Out"/>
+                </Menu>
+
+
+    render(<Toplevel>
+                <AppBar title="Hello!" leftButton={<IconButton iconClass="hamburger"/>} rightButtons={[<MenuButton iconClass="more-vert" menu={menu}/>]}/>
                 <p><TabStrip tabs={[
                 {id: "1", title: "Buttons", component:
                     <div>
@@ -50,7 +68,7 @@ waitForFonts(["Roboto"], () => {
                         <p><Slider min={0} max={100} value={50}/></p>
                     </div>}
                 ]} active="2"/></p>
-        </div>, document.querySelector("#content"))
+        </Toplevel>, document.querySelector("#content"))
     document.body.classList.remove("disable-animation");
 }, () => {
     console.error("Oh dear");
