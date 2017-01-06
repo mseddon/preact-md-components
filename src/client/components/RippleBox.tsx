@@ -16,14 +16,14 @@ export class RippleBox extends Component<{extraClasses?: string, rippleClass?: s
             clearTimeout(this.timer);
         if(event instanceof MouseEvent) {
             let {x,y} = globalPosition(this.rippleBox);
-            this.ripple.style.left = (event.pageX-x-12)+"px"
-            this.ripple.style.top = (event.pageY-y-12)+"px"
+            this.ripple.style.left = (event.pageX-x-2)+"px"
+            this.ripple.style.top = (event.pageY-y-2)+"px"
             window.addEventListener("mouseup", this.resetRipple);
         } else if(event instanceof TouchEvent) {
             let touch = event.changedTouches.item(0)
             let {x,y} = globalPosition(this.rippleBox);
-            this.ripple.style.left = (touch.pageX-x-12)+"px"
-            this.ripple.style.top = (touch.pageY-y-12)+"px"
+            this.ripple.style.left = (touch.pageX-x-2)+"px"
+            this.ripple.style.top = (touch.pageY-y-2)+"px"
             window.addEventListener("touchend", this.resetRipple);
         }
         this.ripple.classList.add("zoom")

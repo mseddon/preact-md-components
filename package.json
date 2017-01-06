@@ -46,6 +46,7 @@
     "most": "^1.1.1",
     "nodemon": "^1.11.0",
     "preact": "^7.1.0",
+    "preact-portal": "^1.1.1",
     "preact-router": "^2.3.2",
     "redux": "^3.6.0",
     "style-loader": "^0.13.1",

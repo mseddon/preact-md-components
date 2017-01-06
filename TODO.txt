@@ -13,7 +13,7 @@
     
 *themes
 
-Tabs
+*Tabs
 
 Menus
 
@@ -24,3 +24,16 @@ Snackbar
 Scroll Bar
 
 Draggable Areas
+
+--------------------------------------
+
+Improvements:
+
+Widgets:
+    Focus
+    Disabled
+
+Tabs:
+    Icons
+    Scroll on overflow
+    Improve content area animation rig

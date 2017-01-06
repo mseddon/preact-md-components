@@ -3,6 +3,7 @@ import { createStore, combineReducers, Store } from 'redux';
 import { AppBar } from "./components/AppBar"
 import { TextField } from "./components/TextField"
 import { Button } from "./components/Button"
+import { IconButton } from "./components/IconButton"
 import { Checkbox } from "./components/Checkbox"
 import { Switch } from "./components/Switch"
 import { RadioButton } from "./components/RadioButton"
@@ -23,7 +24,7 @@ waitForFonts(["Roboto"], () => {
     if(process.env["DEBUG"])
         require('preact/devtools')
 
-    render(<div><AppBar title="Hello!"/>
+    render(<div><AppBar title="Hello!" leftButton={<IconButton iconClass="hamburger"/>} rightButtons={[<IconButton iconClass="more-vert"/>]}/>
                 <p><TabStrip tabs={[
                 {id: "1", title: "Buttons", component:
                     <div>
