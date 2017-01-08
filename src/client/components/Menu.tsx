@@ -1,8 +1,8 @@
-import { h, Component } from "preact"
+import { h, Component, cloneElement } from "preact"
 import { RippleBox } from "./RippleBox";
 import { globalRect } from "../domutil";
 
-export class Menu extends Component<{x?: number, y?: number, width?: number, height?: number}, {visible: boolean, x: number, y: number}> {
+export class Menu extends Component<{x?: number, y?: number, width?: number, height?: number, closeMenu?: () => void}, {visible: boolean, x: number, y: number}> {
     myElem: HTMLElement
     constructor(props) {
         super();
@@ -25,13 +25,21 @@ export class Menu extends Component<{x?: number, y?: number, width?: number, hei
     }
 
     render({}, {visible}) {
-        return <div ref={x => this.myElem = x as HTMLElement} style={{ visibility: visible ? "visible" : "hidden", left: this.state.x+"px", top: this.state.y+"px"}} className="md-menu md-cascading-menu">{this.props.children}</div>
+        return <div ref={x => this.myElem = x as HTMLElement} style={{ visibility: visible ? "visible" : "hidden", left: this.state.x+"px", top: this.state.y+"px"}} className="md-menu md-cascading-menu">
+                    {this.props.children.map(c => cloneElement(c, { closeMenu: this.props.closeMenu }))}
+               </div>
     }
 }
 
-export class MenuItem extends Component<{label: string}, any> {
+export class MenuItem extends Component<{label: string, action?: () => void, closeMenu?: () => void}, any> {
+    trigger = () => {
+        if(this.props.action)
+            this.props.action();
+        if(this.props.closeMenu)
+            this.props.closeMenu();
+    }
     render() {
-        return <div className="md-menu-item"><RippleBox/><label>{this.props.label}</label></div>
+        return <div className="md-menu-item" onClick={this.trigger}><RippleBox/><label>{this.props.label}</label></div>
     }
 }
 

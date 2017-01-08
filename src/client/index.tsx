@@ -30,7 +30,7 @@ waitForFonts(["Roboto"], () => {
         require('preact/devtools')
 
     let menu = <Menu>
-                    <MenuItem label="New"/>
+                    <MenuItem label="New" action={() => console.log("NEW!")}/>
                     <MenuItem label="Open..."/>
                     <MenuSeparator/>
                     <MenuItem label="Close"/>

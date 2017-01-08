@@ -41,8 +41,10 @@ export class RippleBox extends Component<{extraClasses?: string, rippleClass?: s
         if(this.timer)
             clearTimeout(this.timer);
         this.timer = setTimeout(() => {
-            this.ripple.classList.remove("zoom")
-            this.ripple.classList.add("fade")
+            if(this.ripple) {
+                this.ripple.classList.remove("zoom")
+                this.ripple.classList.add("fade")
+            }
         }, 100)
         window.removeEventListener("mouseup", this.resetRipple);
         window.removeEventListener("touchend", this.resetRipple);
