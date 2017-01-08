@@ -11,6 +11,13 @@ export class RippleBox extends Component<{extraClasses?: string, rippleClass?: s
         this.ripple = ripple;
     }
 
+    componentDidMount() {
+        // remove any animations on mount.
+        // TODO: this should really be handled via state, not using dom hackery.
+        this.ripple.classList.remove("fade")
+        this.ripple.classList.remove("zoom")
+    }
+
     triggerRipple = (event: MouseEvent|TouchEvent) => {
         if(this.timer)
             clearTimeout(this.timer);

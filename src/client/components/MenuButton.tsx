@@ -15,10 +15,15 @@ export class MenuButton extends Component<{iconClass: string, menu: VNode}, { op
         this.state = { open: false }
     }
 
-    click = () => {
+    click = e => {
+        e.preventDefault();
         this.setState({open: true})
     }
 
+    closeMenu = e=> {
+        e.preventDefault();
+        this.setState({...this.state, open: false});
+    }
 
     componentDidMount() {
         this.myBox = globalRect(this.myElem);
@@ -27,11 +32,12 @@ export class MenuButton extends Component<{iconClass: string, menu: VNode}, { op
     }
 
     render() {
-        return <div ref={x => this.myElem = x as HTMLElement}class="md-icon-button" aria-role="button" onMouseDown={this.click} onTouchStart={this.click}>
+        return <div ref={x => this.myElem = x as HTMLElement}class="md-icon-button" aria-role="button" onMouseDown={this.click} onTouchEnd={this.click}>
                    <span className={"md-icon md-icon-"+this.props.iconClass}/>
                    <RippleBox extraClasses="ripple-icon"/>
                    {
-                       this.state.open ? <Portal into="#md-layer-menu">{cloneElement(this.props.menu, {...this.myBox})}</Portal> : <div/>
+                       this.state.open ? [<Portal into="#md-layer-menu">{cloneElement(this.props.menu, {...this.myBox})}</Portal>,
+                   <Portal into="body"><div class="md-layer-menu-mask" onClick={this.closeMenu} onTouchStart={this.closeMenu}/></Portal>] : <div/>
                    }
                </div>
     }
