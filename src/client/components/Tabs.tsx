@@ -51,7 +51,7 @@ export class TabStrip extends Component<{tabs: {id: string, title: string, compo
     }
 
     render() {
-        return <div>
+        return <div className="md-tab-pane">
                   <div ref={x => this.elem = x as HTMLDivElement} className="md-tab-strip primary-bg">
                     {this.props.tabs.map(child => 
                         <div ref={x => this.tabElements[child.id] = x as HTMLDivElement}

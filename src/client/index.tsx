@@ -14,6 +14,7 @@ import { Spinner } from "./components/Spinner"
 import { Slider } from "./components/Slider"
 import { TabStrip } from "./components/Tabs"
 import { Menu, MenuItem, MenuSeparator } from "./components/Menu"
+import { SplitPane } from "./components/SplitPane"
 import { waitForFonts } from "./domutil";
 import * as theme from "./theme";
 
@@ -41,15 +42,20 @@ waitForFonts(["Roboto"], () => {
 
 
     render(<Toplevel>
-                <AppBar title="Hello!" leftButton={<IconButton iconClass="hamburger"/>} rightButtons={[<MenuButton iconClass="more-vert" menu={menu}/>]}/>
-                <p><TabStrip tabs={[
-                {id: "1", title: "Buttons", component:
+                <div style={{display: "flex", flexDirection: "column", position: "fixed", top: "0", left: "0", width: "100%", height: "100%"}}> 
+                <div style={{flexGrow: "0"}}>
+                    <AppBar title="Hello!" leftButton={<IconButton iconClass="hamburger"/>} rightButtons={[<MenuButton iconClass="more-vert" menu={menu}/>]}/>
+                </div>
+                <div style={{flexGrow: "1", position: "relative"}}><TabStrip tabs={[
+                {id: "1", title: "Stuff", component:
                     <div>
                         <p><Button title="Button" onClick={null}/></p>
                         <p><Checkbox title="Wee"/></p>
                         <p><Switch title="Wee" checked={true}/></p>
                         <p><RadioButton name="buttons" title="Radio 1" value="1"/></p>
                         <p><RadioButton name="buttons" title="Radio 2" value="2"/></p>
+                        <TextField prompt="Hello" floatingLabel={true} value=""/>
+                        <p><Slider min={0} max={100} value={50}/></p>
                     </div>},
                 {id: "2", title: "Load", component: 
                     <div>
@@ -61,12 +67,10 @@ waitForFonts(["Roboto"], () => {
                         <p><ProgressBar progress={50} buffer={80} /></p>
                         <p><Spinner/></p>
                     </div>},
-                {id: "3", title: "Suck it", component:
-                    <div>
-                        <TextField prompt="Hello" floatingLabel={true} value=""/>
-                        <p><Slider min={0} max={100} value={50}/></p>
-                    </div>}
-                ]} active="2"/></p>
+                {id: "3", title: "Split", component:
+                    <SplitPane first={<div style={{backgroundColor: "#0f0", position: "absolute", width: "100%", height: "100%"}}/>} second={<div style={{backgroundColor: "#f00", position: "absolute", width: "100%", height: "100%"}}/>} axis="horizontal"/>}
+                ]} active="2"/></div>
+            </div>
         </Toplevel>, document.querySelector("#content"))
     document.body.classList.remove("disable-animation");
 }, () => {

@@ -17,13 +17,13 @@
 
 *Menus
 
+Draggable Areas
+
 Dialog
 
 Snackbar
 
 Scroll Bar
-
-Draggable Areas
 
 --------------------------------------
 
@@ -45,4 +45,3 @@ Menus:
     hotkeys for desktop
     MenuBars
     Transition is crap.
-    
