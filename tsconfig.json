@@ -1,12 +1,12 @@
 {
     "compilerOptions": {
         "moduleResolution": "node",
+        "declaration": true,
         "target": "es5",
         "jsx": "react",
         "jsxFactory": "h",
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
-        "declaration": false,
         "noImplicitAny": false,
         "noImplicitUseStrict": false,
         "removeComments": true,

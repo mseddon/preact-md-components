@@ -16,7 +16,6 @@ import { TabStrip } from "./components/Tabs"
 import { Menu, MenuItem, MenuSeparator } from "./components/Menu"
 import { waitForFonts } from "./domutil";
 import * as theme from "./theme";
-import * as Portal from "preact-portal"
 
 function makeStore(reducer) {
     if(process.env["DEBUG"])

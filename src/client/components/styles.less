@@ -755,7 +755,23 @@ input:focus {
     background: #fff;
     border-radius: 2px;
     min-width: 124px;
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12)
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+    animation: unfold-menu 0.25s cubic-bezier(.4,0,.2,1);
+    overflow: hidden;
+}
+
+@keyframes unfold-menu {
+    from {
+        transform: translateY(-24px);
+        max-height: 10px;
+        opacity: 0;
+    }
+    
+    to {
+        transform: translateY(0px);
+        max-height: 1024px;
+        opacity: 1;
+    }
 }
 
 // mobile

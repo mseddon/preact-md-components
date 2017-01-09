@@ -15,7 +15,7 @@
 
 *Tabs
 
-Menus
+*Menus
 
 Dialog
 
@@ -37,3 +37,12 @@ Tabs:
     Icons
     Scroll on overflow
     Improve content area animation rig
+
+Menus:
+    Check MenuItems
+    Radio MenuItems
+    Nested Menus
+    hotkeys for desktop
+    MenuBars
+    Transition is crap.
+    

@@ -149,5 +149,10 @@ gulp.task('production', cb => {
     })
 })
 
-
 gulp.task('default', ["build:server", "build:client"]);
+
+gulp.task("publish", () => {
+    gulp.src(['src/client/**/*.ts', 'src/client/**/*.tsx'], { base: "src/client"})
+    .pipe(tsProject())
+    .pipe(gulp.dest('.'));
+})
