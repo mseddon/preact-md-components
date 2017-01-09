@@ -7,4 +7,9 @@ build
 .vscode
 *~
 .idea
-./*.js
+/*.js
+*.d.ts
+/client
+/components
+/server
+/shared

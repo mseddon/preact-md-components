@@ -1,0 +1,10 @@
+node_modules
+www
+doc
+build
+.vscode
+*~
+.idea
+*.ts
+*.tsx
+/server
