@@ -100,6 +100,8 @@ let animation = false,
 		}
 	}
 
+
+// TODO - we don't use the animation DOM attach event hack in this verison, either remove it or implement it.
 let stylesCreated = false
 let animationName = 'resizeanim';
 let animationKeyframes = '@' + keyframeprefix + 'keyframes ' + animationName + ' { from { opacity: 0; } to { opacity: 0; } } ';
