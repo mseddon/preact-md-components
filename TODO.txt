@@ -17,7 +17,7 @@
 
 *Menus
 
-Draggable Areas
+SplitPane
 
 Dialog
 
