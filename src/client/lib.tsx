@@ -10,7 +10,7 @@ export function makeStore<A>(reducer: Reducer<A>): Store<A> {
 }
 
 export function init(renderFn: () => void) {
-    if(process.env["DEBUG"])
-        require('preact/devtools')
-    waitForFonts(["Roboto"], renderFn, () => {}
-)};
+    document.body.classList.add("disable-animation");
+    waitForFonts(["Roboto"], renderFn, () => {})
+    setTimeout(() => document.body.classList.remove("disable-animation"), 1);
+};

@@ -54,7 +54,7 @@ waitForFonts(["Roboto"], () => {
                         <p><Switch title="Wee" checked={true}/></p>
                         <p><RadioButton name="buttons" title="Radio 1" value="1"/></p>
                         <p><RadioButton name="buttons" title="Radio 2" value="2"/></p>
-                        <TextField prompt="Hello" floatingLabel={true} value=""/>
+                        <TextField placeholder="Hello" floatingLabel={true} value=""/>
                         <p><Slider min={0} max={100} value={50}/></p>
                     </div>},
                 {id: "2", title: "Load", component: 
