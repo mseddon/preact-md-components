@@ -1,3 +1,5 @@
+Button
+
 *Toggles:
     *Checkbox
     *RadioButton
@@ -30,8 +32,16 @@ Scroll Bar
 Improvements:
 
 Widgets:
-    Focus
     Disabled
+        Button
+        Checkbox
+        RadioButton
+        Switch
+        Slider
+        Tab
+        MenuItem
+        
+    Focus
 
 Tabs:
     Icons

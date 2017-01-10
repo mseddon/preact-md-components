@@ -1,5 +1,4 @@
 import { h, render } from "preact";
-import { createStore, combineReducers, Store } from 'redux';
 import { AppBar } from "./components/AppBar"
 import { TextField } from "./components/TextField"
 import { Toplevel } from "./components/Toplevel"
@@ -17,13 +16,6 @@ import { Menu, MenuItem, MenuSeparator } from "./components/Menu"
 import { SplitPane } from "./components/SplitPane"
 import { waitForFonts } from "./domutil";
 import * as theme from "./theme";
-
-function makeStore(reducer) {
-    if(process.env["DEBUG"])
-        return createStore(reducer, window["__REDUX_DEVTOOLS_EXTENSION__"] && window["__REDUX_DEVTOOLS_EXTENSION__"]());
-    else
-        return createStore(reducer);
-}
 
 waitForFonts(["Roboto"], () => {
     if(process.env["DEBUG"])
