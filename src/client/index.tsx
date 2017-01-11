@@ -41,7 +41,7 @@ waitForFonts(["Roboto"], () => {
                 <div style={{flexGrow: "1", position: "relative"}}><TabStrip tabs={[
                 {id: "1", title: "Stuff", component:
                     <div>
-                        <p><Button title="Button" onClick={null}/></p>
+                        <p><Button onClick={() => console.log("HR")}>Button</Button></p>
                         <p><Checkbox title="Wee"/></p>
                         <p><Switch title="Wee" checked={true}/></p>
                         <p><RadioButton name="buttons" title="Radio 1" value="1"/></p>

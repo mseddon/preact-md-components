@@ -22,6 +22,10 @@ export class TextField extends Component<{placeholder: string, value: string, fl
         this.setState({...this.state, focused: false});
     }
 
+    componentWillReceiveProps(props) {
+        this.setState({...this.state, value: props.value})
+    }
+
     render() {
         return <div class={"md-field "+(this.props.floatingLabel ? "floating-label " : "")+ (this.state.focused ? " is-focused" : "") + (this.state.value !== "" ? " has-content" : "")}>
                  <input value={this.state.value} onFocus={this.setFocus} onBlur={this.clearFocus} onInput={this.updateInput}/>
