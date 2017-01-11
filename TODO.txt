@@ -20,10 +20,15 @@ Button
 *Menus
 
 SplitPane
+    Embedded bits and styling
 
 DropDown
 
 Dialog
+
+ToolTip
+
+ScrollPane
 
 Snackbar
 
@@ -33,9 +38,6 @@ Table
 
 Tree
 
-ToolTip
-
-ScrollPane
 --------------------------------------
 
 Improvements:

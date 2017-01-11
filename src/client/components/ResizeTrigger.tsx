@@ -83,7 +83,6 @@ export class ResizeTrigger extends Component<{onResize: () => void}, {expandChil
     }
 }
 
-// TODO - we don't use the animation DOM attach event hack in this verison, either remove it or implement it.
 let stylesCreated = false
 
 let createStyles = () => {
