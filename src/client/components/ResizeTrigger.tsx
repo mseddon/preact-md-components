@@ -34,34 +34,44 @@ export class ResizeTrigger extends Component<{onResize: () => void}, any> {
     }
 
     checkTriggers() {
-        return this.myElem.offsetWidth != this.lastWidth || this.myElem.offsetHeight != this.lastHeight;
+        return this.myElem && (this.myElem.offsetWidth != this.lastWidth || this.myElem.offsetHeight != this.lastHeight);
     }
 
     componentDidMount() {
         if(this.parent)
-            this.parent.removeEventListener("scroll", this.resize);
+            this.parent.removeEventListener("scroll", this.resize, true);
         this.parent = this.myElem.parentElement;
-        if(getComputedStyle(this.parent).position == "static") {
+        if(getComputedStyle(this.parent).position === "static") {
             // gnarly
+            debugger;
             this.parent.style.position = "relative";
         }
         this.resetTriggers();
         this.parent.addEventListener("scroll", this.resize, true);
     }
 
-    componentDidUnmount() {
-        if(this.parent)
-            this.parent.removeEventListener("scroll", this.resize);
+    componentWillUnmount() {
+        console.log("UNMOUNT")
+        cancelAnimationFrame(this.resizeRAF);
+        if(this.parent) {
+            this.parent.removeEventListener("scroll", this.resize, true);
+        }
         this.parent = null;
+        this.contract = null;
+        this.expandChild = null;
+        this.expand = null;
     }
 
+
     resetTriggers() {
-        this.contract.scrollLeft = this.contract.scrollWidth;
-	    this.contract.scrollTop = this.contract.scrollHeight;
-	    this.expandChild.style.width = this.expand.offsetWidth + 1 + 'px';
-	    this.expandChild.style.height = this.expand.offsetHeight + 1 + 'px';
-	    this.expand.scrollLeft = this.expand.scrollWidth;
-	    this.expand.scrollTop = this.expand.scrollHeight;
+        if(this.contract) {
+            this.contract.scrollLeft = this.contract.scrollWidth;
+            this.contract.scrollTop = this.contract.scrollHeight;
+            this.expandChild.style.width = this.expand.offsetWidth + 1 + 'px';
+            this.expandChild.style.height = this.expand.offsetHeight + 1 + 'px';
+            this.expand.scrollLeft = this.expand.scrollWidth;
+            this.expand.scrollTop = this.expand.scrollHeight;
+        }
     }
 
     render() {

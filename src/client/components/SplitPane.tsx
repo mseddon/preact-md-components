@@ -2,7 +2,14 @@ import {h, Component, VNode } from "preact"
 import { globalRect } from "../domutil";
 import { ResizeTrigger } from "./ResizeTrigger";
 
-export class SplitPane extends Component<{first: VNode, second: VNode, axis: "horizontal" | "vertical"}, { splitPos: number }> {
+export interface Rect {
+    x: number;
+    y: number;
+    width: number;
+    height: number
+}
+
+export class SplitPane extends Component<{first: VNode, second: VNode, axis: "horizontal" | "vertical"}, { splitPos: number, myRect: Rect, splitterRect: Rect }> {
     myElem: HTMLElement;
     first: HTMLElement;
     second: HTMLElement;
@@ -11,7 +18,7 @@ export class SplitPane extends Component<{first: VNode, second: VNode, axis: "ho
     dragOffset: number = 0;
     constructor() {
         super();
-        this.state = { splitPos: 0.5 }
+        this.state = { splitPos: 0.5, myRect: {x: 0, y: 0, width: 0, height: 0}, splitterRect: {x: 0, y: 0, width: 0, height: 0} }
     }
 
     xToValue(xPos: number) {
@@ -60,38 +67,49 @@ export class SplitPane extends Component<{first: VNode, second: VNode, axis: "ho
         window.removeEventListener("touchmove", this.onDrag);
     }
 
-    resizeChildren() {
-        let myRect = globalRect(this.myElem);
+    computeSizes() {
+        if(!this.splitter) {
+            return {
+                firstRect: {},
+                splitterRect: {},
+                secondRect: {}
+            }
+        }
+        let myRect = this.state.myRect;
         let splitPos = this.state.splitPos;
         if(this.props.axis == "vertical") {
             let h = myRect.height-this.splitter.offsetHeight;
-            this.first.style.height = (h*splitPos)+"px";
-            this.splitter.style.top = (h*splitPos)+"px";
-            this.second.style.height = (h*(1-splitPos))+"px";
-            this.second.style.top = (h*splitPos+this.splitter.offsetHeight)+"px"
+
+            return {
+                firstRect: {top: "0px", height: (h*splitPos)+"px"},
+                splitterRect: {top: (h*splitPos)+"px"},
+                secondRect: {height: (h*(1-splitPos))+"px", top: (h*splitPos+this.splitter.offsetHeight)+"px"}
+            }
         } else {
             let w = myRect.width-this.splitter.offsetWidth;
-            this.first.style.width = (w*splitPos)+"px";
-            this.splitter.style.left = (w*splitPos)+"px";
-            this.second.style.width = (w*(1-splitPos))+"px";
-            this.second.style.left = (w*splitPos+this.splitter.offsetWidth)+"px"
-        }
+            return {
+                firstRect: {left: "0px", width: (w*splitPos)+"px"},
+                splitterRect: { left: (w*splitPos)+"px"},
+                secondRect: { left: (w*splitPos+this.splitter.offsetWidth)+"px", width: (w*(1-splitPos))+"px" }
+            }
+        }        
+    }
+
+    resizeChildren() {
+        this.setState({...this.state, myRect: globalRect(this.myElem), splitterRect: globalRect(this.splitter)})
     }
 
     componentDidMount() {
         this.resizeChildren();
     }
-
-    componentDidUpdate() {
-        this.resizeChildren();
-    }
     
     render() {
+        let {firstRect, splitterRect, secondRect} = this.computeSizes();
         return <div ref={x => this.myElem = x as HTMLElement} className={`md-split-pane md-split-${this.props.axis}`}>
                   <ResizeTrigger onResize={() => this.resizeChildren()}/>
-                  <div ref={x => this.first = x as HTMLElement} className="first">{this.props.first}</div>
-                  <div ref={x => this.splitter = x as HTMLElement}className="splitter" onMouseDown={this.startDrag} onTouchStart={this.startDrag} />
-                  <div ref={x => this.second = x as HTMLElement}className="second">{this.props.second}</div>
+                  <div key="first" style={firstRect} ref={x => this.first = x as HTMLElement} className="first">{this.props.first}</div>
+                  <div key="split" style={splitterRect} ref={x => this.splitter = x as HTMLElement}className="splitter" onMouseDown={this.startDrag} onTouchStart={this.startDrag} />
+                  <div key="second" style={secondRect} ref={x => this.second = x as HTMLElement}className="second">{this.props.second}</div>
                </div>
     }
 }

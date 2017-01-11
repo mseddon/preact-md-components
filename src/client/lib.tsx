@@ -1,3 +1,4 @@
+import "./components/styles.less"
 import { waitForFonts } from "./domutil";
 import * as theme from "./theme";
 
