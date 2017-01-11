@@ -3,7 +3,9 @@ import { waitForFonts } from "./domutil";
 import * as theme from "./theme";
 
 export function init(renderFn: () => void) {
-    document.body.classList.add("disable-animation");
-    waitForFonts(["Roboto"], renderFn, () => {})
-    setTimeout(() => document.body.classList.remove("disable-animation"), 1);
+    window.addEventListener("load", () => {
+        document.body.classList.add("disable-animation");
+        waitForFonts(["Roboto"], renderFn, () => {})
+        setTimeout(() => document.body.classList.remove("disable-animation"), 1);
+    })
 };
