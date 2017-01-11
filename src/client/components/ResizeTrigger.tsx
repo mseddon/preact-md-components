@@ -5,123 +5,89 @@ import {h, Component } from "preact";
  * 
  * This hack is INSANE, but robust as hell.
  */
-export class ResizeTrigger extends Component<{onResize: () => void}, any> {
+export class ResizeTrigger extends Component<{onResize: () => void}, {expandChildHeight: number, expandChildWidth: number, expandScrollLeft: number, expandScrollTop: number, contractScrollTop: number, contractScrollLeft: number, lastWidth: number, lastHeight: number}> {
     myElem: HTMLElement;
-    parent: HTMLElement;
     expand: HTMLElement;
     expandChild: HTMLElement;
     contract: HTMLElement;
-    lastWidth: number = 0;
-    lastHeight: number = 0;
-    resizeRAF: number;
 
     constructor() {
         super();
         createStyles();
+        this.setState({expandChildWidth: 0, expandChildHeight: 0, expandScrollLeft: 0, expandScrollTop: 0, contractScrollTop: 0, contractScrollLeft: 0, lastWidth: 0, lastHeight: 0})
     }
 
-    resize = () => {
-        this.resetTriggers();
-        if(this.resizeRAF)
-            cancelAnimationFrame(this.resizeRAF);
-        this.resizeRAF = requestAnimationFrame(() => {
-            if(this.checkTriggers()) {
-                this.lastWidth = this.myElem.offsetWidth;
-                this.lastHeight = this.myElem.offsetHeight;
-                this.props.onResize();
-            }
-        })
-    }
-
-    checkTriggers() {
-        return this.myElem && (this.myElem.offsetWidth != this.lastWidth || this.myElem.offsetHeight != this.lastHeight);
+    componentWillMount() {
+        this["forceUpdate"]() // 
     }
 
     componentDidMount() {
-        if(this.parent)
-            this.parent.removeEventListener("scroll", this.resize, true);
-        this.parent = this.myElem.parentElement;
-        if(getComputedStyle(this.parent).position === "static") {
-            // gnarly
-            debugger;
-            this.parent.style.position = "relative";
-        }
-        this.resetTriggers();
-        this.parent.addEventListener("scroll", this.resize, true);
+        let [width, height] = this.containerSize();
+        this.reset(width, height);
     }
 
-    componentWillUnmount() {
-        console.log("UNMOUNT")
-        cancelAnimationFrame(this.resizeRAF);
-        if(this.parent) {
-            this.parent.removeEventListener("scroll", this.resize, true);
-        }
-        this.parent = null;
-        this.contract = null;
-        this.expandChild = null;
-        this.expand = null;
+    shouldComponentUpdate(newProps) {
+        return this.props !== newProps;
     }
 
+    reset(width: number, height: number) {
+        if(typeof window === "undefined")
+            return; // in node.
+        const parent = this.myElem.parentElement;
 
-    resetTriggers() {
-        if(this.contract) {
-            this.contract.scrollLeft = this.contract.scrollWidth;
-            this.contract.scrollTop = this.contract.scrollHeight;
-            this.expandChild.style.width = this.expand.offsetWidth + 1 + 'px';
-            this.expandChild.style.height = this.expand.offsetHeight + 1 + 'px';
-            this.expand.scrollLeft = this.expand.scrollWidth;
-            this.expand.scrollTop = this.expand.scrollHeight;
-        }
+        if(getComputedStyle(parent).position == "static")
+            parent.style.position = "relative";
+
+        this.setState({ ...this.state,
+            expandChildHeight: this.expand.offsetHeight+10,
+            expandChildWidth: this.expand.offsetWidth+10,
+            lastWidth: width,
+            lastHeight: height
+        })
+    }
+
+    componentDidUpdate() {
+        this.expand.scrollLeft = this.expand.scrollWidth;
+        this.expand.scrollTop = this.expand.scrollHeight;
+
+        this.contract.scrollLeft = this.contract.scrollWidth;
+        this.contract.scrollTop = this.contract.scrollHeight;
+    }
+
+    containerSize() {
+        return [this.myElem.parentElement.offsetWidth, this.myElem.parentElement.offsetHeight]
+    }
+
+    handleScroll = () => {
+        if(typeof window === undefined)
+            return;
+
+        const [width, height] = this.containerSize();
+        if(width !== this.state.lastWidth || height !== this.state.lastHeight)
+            this.props.onResize();
+        this.reset(width, height);
     }
 
     render() {
         return <div className="resize-triggers" ref={x => this.myElem = x as HTMLElement}>
-                  <div ref={x => this.expand = x as HTMLElement} class="expand-trigger"><div ref={x => this.expandChild = x as HTMLElement}/></div>
-                  <div ref={x => this.contract = x as HTMLElement} className="contract-trigger"/>
+                  <div ref={x => this.expand = x as HTMLElement} onScroll={this.handleScroll}  class="expand-trigger">
+                    <div ref={x => this.expandChild = x as HTMLElement} style={{width: this.state.expandChildWidth+"px", height: this.state.expandChildHeight+"px"}}/>
+                  </div>
+                  <div ref={x => this.contract = x as HTMLElement} onScroll={this.handleScroll} className="contract-trigger">
+                    <div/>
+                  </div>
                </div>
     }
 }
 
-
-
-
-
-let animation = false,
-	animationstring = 'animation',
-	keyframeprefix = '',
-	animationstartevent = 'animationstart',
-	domPrefixes = 'Webkit Moz O ms'.split(' '),
-	startEvents = 'webkitAnimationStart animationstart oAnimationStart MSAnimationStart'.split(' '),
-	pfx  = '';
-
-	var elm = document.createElement('fakeelement');
-	if(elm.style.animationName !== undefined) { animation = true; }    
-		
-	if(animation === false) {
-		for(let i = 0; i < domPrefixes.length; i++ ) {
-			if(elm.style[ domPrefixes[i] + 'AnimationName'] !== undefined) {
-				pfx = domPrefixes[i];
-				animationstring = pfx + 'Animation';
-				keyframeprefix = '-' + pfx.toLowerCase() + '-';
-				animationstartevent = startEvents[ i ];
-				animation = true;
-				break;
-			}
-		}
-	}
-
-
 // TODO - we don't use the animation DOM attach event hack in this verison, either remove it or implement it.
 let stylesCreated = false
-let animationName = 'resizeanim';
-let animationKeyframes = '@' + keyframeprefix + 'keyframes ' + animationName + ' { from { opacity: 0; } to { opacity: 0; } } ';
-let animationStyle = keyframeprefix + 'animation: 1ms ' + animationName + '; ';
 
 let createStyles = () => {
 	if (!stylesCreated) {
 		//opacity:0 works around a chrome bug https://code.google.com/p/chromium/issues/detail?id=286360
-		let css = (animationKeyframes ? animationKeyframes : '') +
-				'.resize-triggers { ' + (animationStyle ? animationStyle : '') + 'visibility: hidden; opacity: 0; } ' +
+		let css = 
+				'.resize-triggers { visibility: hidden; opacity: 0; } ' +
 				'.resize-triggers, .resize-triggers > div, .contract-trigger:before { content: \" \"; display: block; position: absolute; top: 0; left: 0; height: 100%; width: 100%; overflow: hidden; } .resize-triggers > div { background: #eee; overflow: auto; } .contract-trigger:before { width: 200%; height: 200%; }',
 			head = document.head || document.getElementsByTagName('head')[0],
 			style = document.createElement('style') as HTMLStyleElement;
@@ -134,5 +100,5 @@ let createStyles = () => {
 
 		head.appendChild(style);
 		stylesCreated = true;
-	}		
+    }
 }
