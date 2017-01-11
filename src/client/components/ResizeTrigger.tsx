@@ -56,7 +56,9 @@ export class ResizeTrigger extends Component<{onResize: () => void}, {expandChil
     }
 
     containerSize() {
-        return [this.myElem.parentElement.offsetWidth, this.myElem.parentElement.offsetHeight]
+        if(this.myElem)
+            return [this.myElem.parentElement.offsetWidth, this.myElem.parentElement.offsetHeight]
+        return [0, 0]
     }
 
     handleScroll = () => {
