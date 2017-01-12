@@ -852,33 +852,27 @@ input:focus {
     top: 0;
     bottom: 0;
 
-    .first {
-        position: absolute;
-        overflow: hidden;
-        width: 100%;
-        height: 100%;
-    }
-
-    .second {
-        overflow: hidden;
+    > .first, > .second {
         position: absolute;
         width: 100%;
         height: 100%;
     }
 
-    .splitter {
+    > .splitter {
         position: absolute;
         background-color: #fff;
-        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2)
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+        .no-user-select;
     }
 
-    &.md-split-vertical .splitter {
+    &.md-split-vertical > .splitter {
         width: 100%;
         height: 16px;
         cursor: ns-resize;
     }
 
-    &.md-split-horizontal .splitter {
+    &.md-split-horizontal > .splitter {
         width: 16px;
         height: 100%;
         cursor: ew-resize;

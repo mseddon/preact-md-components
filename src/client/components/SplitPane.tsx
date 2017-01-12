@@ -9,7 +9,7 @@ export interface Rect {
     height: number
 }
 
-export class SplitPane extends Component<{first: VNode, second: VNode, axis: "horizontal" | "vertical"}, { splitPos: number, myRect: Rect, splitterRect: Rect }> {
+export class SplitPane extends Component<{first: VNode, second: VNode, axis: "horizontal" | "vertical", extraClasses?: string}, { splitPos: number, myRect: Rect, splitterRect: Rect }> {
     myElem: HTMLElement;
     first: HTMLElement;
     second: HTMLElement;
@@ -108,7 +108,7 @@ export class SplitPane extends Component<{first: VNode, second: VNode, axis: "ho
         return <div ref={x => this.myElem = x as HTMLElement} className={`md-split-pane md-split-${this.props.axis}`}>
                   <ResizeTrigger onResize={() => this.resizeChildren()}/>
                   <div key="first" style={firstRect} ref={x => this.first = x as HTMLElement} className="first">{this.props.first}</div>
-                  <div key="split" style={splitterRect} ref={x => this.splitter = x as HTMLElement}className="splitter" onMouseDown={this.startDrag} onTouchStart={this.startDrag} />
+                  <div key="split" style={splitterRect} ref={x => this.splitter = x as HTMLElement} className={"splitter" + (this.props.extraClasses ? " "+this.props.extraClasses : "")} onMouseDown={this.startDrag} onTouchStart={this.startDrag}>{this.props.children}</div>
                   <div key="second" style={secondRect} ref={x => this.second = x as HTMLElement}className="second">{this.props.second}</div>
                </div>
     }
