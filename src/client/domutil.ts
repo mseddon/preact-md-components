@@ -37,7 +37,7 @@ export function globalRect(elem: Element) {
 export function waitForFonts(familyName: string[], success: () => void, failure: () => void) {
     function fontTester(familyName: string) {
         let tester = document.createElement("span");
-        tester.textContent = "BESbswy";
+        tester.textContent = "BESbswy menu";
         tester.style.cssText = 'position:absolute;top:-9999px;left:-9999px;font-size:300px;width:auto;height:auto;line-height:normal;margin:0;padding:0;font-family:serif;';
         tester.style.fontFamily = `"${familyName}", serif`;
 
@@ -62,14 +62,16 @@ export function waitForFonts(familyName: string[], success: () => void, failure:
 
         function smash() {
             loaders.forEach(x => {
-              if(fallbackWidth != x.offsetWidth)
-                total--;
+              if(fallbackWidth != x.offsetWidth && !x["done"]) {
+                 total--;
+                 x["done"] = true;
+              }
             })
             if(total == 0) {
                 cleanup();
                 success();
             } else if(Date.now()-time > 3000) {
-                cleanup();
+                //cleanup();
                 failure();
             } else {
                 setTimeout(smash, 50);

@@ -28,9 +28,9 @@ export class TextField extends Component<{placeholder: string, value: string, fl
 
     render() {
         return <div class={"md-field "+(this.props.floatingLabel ? "floating-label " : "")+ (this.state.focused ? " is-focused" : "") + (this.state.value !== "" ? " has-content" : "")}>
-                 <input value={this.state.value} onFocus={this.setFocus} onBlur={this.clearFocus} onInput={this.updateInput}/>
-                 <label className={(this.state.value === "" ? "show-placeholder" : "no-placeholder") + ((this.state.focused || this.state.value !=="") ? " primary-fg": "")}>{this.props.placeholder}</label>
-                 <span className="underline"/><span className="after primary-bg"></span>
+                 <input value={this.state.value} onFocus={this.setFocus} onBlur={this.clearFocus} onInput={this.updateInput} className="text-primary"/>
+                 <label className={(this.state.value === "" ? "show-placeholder" : "no-placeholder") + ((this.state.focused || this.state.value !=="") ? " accent-fg": " hint-text")}>{this.props.placeholder}</label>
+                 <span className="underline"/><span className="after accent-bg"></span>
                </div>
     }
 }

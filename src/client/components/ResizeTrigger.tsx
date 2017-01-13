@@ -23,7 +23,6 @@ export class ResizeTrigger extends Component<{onResize: () => void}, {expandChil
 
     componentDidMount() {
         let [width, height] = this.containerSize();
-        console.log(width, height);
         this.reset(width, height);
     }
 

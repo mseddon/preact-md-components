@@ -17,7 +17,7 @@ import { SplitPane } from "./components/SplitPane"
 import { waitForFonts } from "./domutil";
 import * as theme from "./theme";
 
-waitForFonts(["Roboto"], () => {
+waitForFonts(["Roboto", 'Material Icons'], () => {
     if(process.env["DEBUG"])
         require('preact/devtools')
 
@@ -36,7 +36,7 @@ waitForFonts(["Roboto"], () => {
     render(<Toplevel>
                 <div style={{display: "flex", flexDirection: "column", position: "fixed", top: "0", left: "0", width: "100%", height: "100%"}}> 
                 <div style={{flexGrow: "0"}}>
-                    <AppBar title="Hello!" leftButton={<IconButton iconClass="hamburger"/>} rightButtons={[<MenuButton iconClass="more-vert" menu={menu}/>]}/>
+                    <AppBar title="Hello!" leftButton={<IconButton><i className="material-icons">menu</i></IconButton>} rightButtons={[<MenuButton menu={menu}><i className="material-icons">more_vert</i></MenuButton>]}/>
                 </div>
                 <div style={{flexGrow: "1", position: "relative"}}><TabStrip tabs={[
                 {id: "1", title: "Stuff", component:

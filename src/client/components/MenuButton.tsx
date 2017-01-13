@@ -5,7 +5,7 @@ import { globalRect } from "../domutil";
 import { RippleBox } from "./RippleBox"
 require('../theme');
 
-export class MenuButton extends Component<{iconClass: string, menu: VNode}, { open: boolean }> {
+export class MenuButton extends Component<{menu: VNode}, { open: boolean }> {
     myElem: HTMLElement;
 
     myBox = { x: 0, y: 0, width: 0, height: 0}
@@ -32,8 +32,8 @@ export class MenuButton extends Component<{iconClass: string, menu: VNode}, { op
     }
 
     render() {
-        return <div ref={x => this.myElem = x as HTMLElement}class="md-icon-button" aria-role="button" onMouseDown={this.click} onTouchEnd={this.click}>
-                   <span className={"md-icon md-icon-"+this.props.iconClass}/>
+        return <div ref={x => this.myElem = x as HTMLElement} class="md-icon-button" aria-role="button" onMouseDown={this.click} onTouchEnd={this.click}>
+                   {this.props.children}
                    <RippleBox extraClasses="ripple-icon"/>
                    {
                        this.state.open ? [<Portal into="#md-layer-menu">{cloneElement(this.props.menu, {...this.myBox, closeMenu: () => this.setState({...this.state, open: false})})}</Portal>,

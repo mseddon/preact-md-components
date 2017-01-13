@@ -24,9 +24,9 @@ export class RadioButton extends Component<{title: string, name: string, value: 
     render() {
         return <label className={"md-radio-button" + (this.state.checked ? " is-checked" : "")}>
                     <input ref={e => this.elem = e as HTMLInputElement} name={this.props.name} type="radio" value={this.props.value} onChange={updateCheck}/>
-                    <span className={"radio-circle" + (this.state.checked ? " primary-border" : "")}/>
-                    <span className="radio-dot primary-bg"/>
-                    <span className="label">{this.props.title}</span>
-                    <RippleBox extraClasses="point-ripple" rippleClass="primary-bg" /></label>
+                    <span className={"radio-circle" + (this.state.checked ? " accent-border" : " check-radio-border")}/>
+                    <span className="radio-dot accent-bg"/>
+                    <span className="label secondary-text">{this.props.title}</span>
+                    <RippleBox extraClasses="point-ripple" rippleClass="accent-bg" /></label>
     }
 }

@@ -18,8 +18,8 @@ export class Switch extends Component<{title: string, checked?: boolean}, {check
     render() {
         return <label className={"md-switch" + (this.state.checked ? " is-checked" : "")}>
                     <input ref={e => this.elem = e as HTMLInputElement} type="checkbox" checked={this.state.checked} onChange={this.updateCheck}/>
-                    <span className={"track" + (this.state.checked ? " primary-bg-lt" : "")}/>
-                    <span className={"thumb" + (this.state.checked ? " primary-bg": "")}><RippleBox extraClasses="point-ripple" rippleClass="primary-bg"/></span>
-                    <span className="label">{this.props.title}</span></label>
+                    <span className={"track" + (this.state.checked ? " accent-bg" : " switch-track-off")}/>
+                    <span className={"thumb" + (this.state.checked ? " accent-bg": "  switch-thumb-off")}><RippleBox extraClasses="point-ripple" rippleClass="accent-bg"/></span>
+                    <span className="label secondary-text">{this.props.title}</span></label>
     }
 }

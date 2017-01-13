@@ -76,9 +76,9 @@ export class Slider extends Component<{min: number, max: number, value: number},
     render() {
         return <div className="md-slider" onMouseDown={this.gutterDown} onTouchStart={this.gutterDown}>
                  <div className="gutter" ref={x => this.gutter = x as HTMLDivElement}>
-                     <div className="filled primary-bg" style={{width: this.getThumbPosition()}}></div>
+                     <div className="filled accent-bg" style={{width: this.getThumbPosition()}}></div>
                      <div className="thumbPivot" ref={x => this.thumbPivot = x as HTMLDivElement} style={{left: this.getThumbPosition()}}>
-                        <div className="thumb primary-bg" ref={x => this.thumb = x as HTMLDivElement} onMouseDown={this.thumbDown}/>
+                        <div className="thumb accent-bg" ref={x => this.thumb = x as HTMLDivElement} onMouseDown={this.thumbDown}/>
                     </div>
                  </div>
                </div>
