@@ -22,7 +22,7 @@ export class Checkbox extends Component<{title: string, checked?: boolean}, {che
     render() {
         return <label className={"md-checkbox" + (this.state.checked ? " is-checked" : "")}>
                     <input ref={e => this.elem = e as HTMLInputElement} type="checkbox" checked={this.state.checked} onChange={this.updateCheck}/>
-                    <span className={"box" + (this.state.checked ? " accent-border" : " check-radio-border")}><span className="accent-bg check"/></span>
+                    <i className={"material-icons check-item" + (this.state.checked ? " accent-fg" : " secondary-text")}>{this.state.checked ? "check_box" : "check_box_outline_blank"}</i>
                     <span className="label secondary-text">{this.props.title}</span>
                     <RippleBox extraClasses="point-ripple" rippleClass="accent-bg" /></label>
     }

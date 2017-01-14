@@ -307,6 +307,14 @@ export function setTheme(theme: Theme) {
     .accent-bg-xlt {
         background-color: ${accentXLight} !important;
     }
+
+    .md-slider .gutter {
+        background-color: ${theme.dark ? "rgba(255,255,255,.3)" :"rgba(0,0,0,.26)"} ;
+    }
+
+    .md-field {
+        border-bottom: 1px solid ${theme.dark ? "rgba(255,255,255,.1)" : "rgba(0,0,0,.12)"};
+    }
     `;
 
     let textNode = document.createTextNode(style);
@@ -316,10 +324,10 @@ export function setTheme(theme: Theme) {
 document.addEventListener("DOMContentLoaded", () => {
     if(!themeSet) {
         setTheme({
-            primary: ["Indigo", "500"],
-            accent: ["Pink", "500"],
-            background: ["Grey", "50"],
-            dark: false
+            primary: ["Blue Grey", "900"],
+            accent: ["Blue", "500"],
+            background: ["Grey", "900"],
+            dark: true
         });
         themeSet = true;
     }
