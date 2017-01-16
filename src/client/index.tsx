@@ -3,6 +3,7 @@ import { AppBar } from "./components/AppBar"
 import { TextField } from "./components/TextField"
 import { Toplevel } from "./components/Toplevel"
 import { Button } from "./components/Button"
+import { Label } from "./components/Label"
 import { IconButton } from "./components/IconButton"
 import { MenuButton } from "./components/MenuButton"
 import { Checkbox } from "./components/Checkbox"
@@ -51,11 +52,11 @@ waitForFonts(["Roboto", 'Material Icons'], () => {
                     </div>},
                 {id: "2", title: "Load", component: 
                     <div>
-                        <p>indeterminate</p>
+                        <p><Label>indeterminate</Label></p>
                         <p><ProgressBar progress={50} buffer={80} indeterminate={true}/></p>
-                        <p>normal</p>
+                        <p><Label>normal</Label></p>
                         <p><ProgressBar progress={50} /></p>
-                        <p>buffering</p>
+                        <p><Label>buffering</Label></p>
                         <p><ProgressBar progress={50} buffer={80} /></p>
                         <p><Spinner/></p>
                     </div>},

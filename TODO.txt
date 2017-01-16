@@ -19,8 +19,8 @@ Button
 
 *Menus
 
-SplitPane
-    Embedded bits and styling
+*SplitPane
+    *Embedded bits and styling
 
 DropDown
 

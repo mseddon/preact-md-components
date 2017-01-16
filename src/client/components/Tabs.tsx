@@ -5,7 +5,7 @@ import {globalRect} from "../domutil"
 import "./styles.less";
 import {RippleBox} from "./RippleBox";
 
-export class TabStrip extends Component<{tabs: {id: string, title: string, component: VNode}[], active: string},{active: string}> {
+export class TabStrip extends Component<{tabs: {id: string, title: string, component: VNode}[], active: string, scrollable?: boolean},{active: string}> {
     elem: HTMLElement;
     tabElements: { [id: string]: HTMLElement } = {};
     tabComponents: { [id: string]: VNode } = {}
@@ -52,7 +52,9 @@ export class TabStrip extends Component<{tabs: {id: string, title: string, compo
 
     render() {
         return <div className="md-tab-pane">
-                  <div ref={x => this.elem = x as HTMLDivElement} className="md-tab-strip primary-bg">
+                  <div ref={x => this.elem = x as HTMLDivElement} className={"md-tab-strip primary-bg" + (this.props.scrollable ? " scrollable" : "")}>
+                    <i className="material-icons left-scroll">chevron_left</i>
+                    <i className="material-icons right-scroll">chevron_right</i>
                     {this.props.tabs.map(child => 
                         <div ref={x => this.tabElements[child.id] = x as HTMLDivElement}
                             className={"md-tab" + (child.id == this.state.active ? " is-active" : "")}
