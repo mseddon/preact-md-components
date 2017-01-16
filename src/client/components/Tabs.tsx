@@ -5,7 +5,7 @@ import {globalRect} from "../domutil"
 import "./styles.less";
 import {RippleBox} from "./RippleBox";
 
-export class TabStrip extends Component<{tabs: {id: string, title: string, component: VNode}[], active: string, scrollable?: boolean},{active: string}> {
+export class TabStrip extends Component<{tabs: {id: string, title: VNode, component: VNode}[], active: string, scrollable?: boolean, extraClasses?: string},{active: string}> {
     elem: HTMLElement;
     tabElements: { [id: string]: HTMLElement } = {};
     tabComponents: { [id: string]: VNode } = {}
@@ -51,7 +51,7 @@ export class TabStrip extends Component<{tabs: {id: string, title: string, compo
     }
 
     render() {
-        return <div className="md-tab-pane">
+        return <div className={"md-tab-pane" + (this.props.extraClasses ? " "+this.props.extraClasses : "")}>
                   <div ref={x => this.elem = x as HTMLDivElement} className={"md-tab-strip primary-bg" + (this.props.scrollable ? " scrollable" : "")}>
                     <i className="material-icons left-scroll">chevron_left</i>
                     <i className="material-icons right-scroll">chevron_right</i>
@@ -61,7 +61,7 @@ export class TabStrip extends Component<{tabs: {id: string, title: string, compo
                             onMouseDown={this.selectTab(child.id)}
                             onTouchStart={this.selectTab(child.id)}>
                             <RippleBox/>
-                            <label>{child.title}</label></div>
+                            {child.title}</div>
                     )}<div ref={x=> this.indicator = x as HTMLDivElement} className="indicator accent-bg"/></div>
                   <div className="md-tab-content-area">
                     <div className="md-tab-scroller" ref={ x => this.scroller = x as HTMLDivElement }>

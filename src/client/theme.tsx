@@ -321,14 +321,23 @@ export function setTheme(theme: Theme) {
     styles.insertBefore(textNode, styles.firstChild);
 }
 
+export const THEME_DARK: Theme = {
+    primary: ["Blue Grey", "900"],
+    accent: ["Blue", "500"],
+    background: ["Grey", "900"],
+    dark: true
+}
+
+export const THEME_LIGHT: Theme = {
+    primary: ["Indigo", "500"],
+    accent: ["Pink", "500"],
+    background: ["Grey", "50"],
+    dark: false
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     if(!themeSet) {
-        setTheme({
-            primary: ["Blue Grey", "900"],
-            accent: ["Blue", "500"],
-            background: ["Grey", "900"],
-            dark: true
-        });
+        setTheme(THEME_LIGHT);
         themeSet = true;
     }
     document.head.appendChild(styles);

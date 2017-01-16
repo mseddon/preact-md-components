@@ -40,7 +40,7 @@ waitForFonts(["Roboto", 'Material Icons'], () => {
                     <AppBar title="Hello!" leftButton={<IconButton><i className="material-icons">menu</i></IconButton>} rightButtons={[<MenuButton menu={menu}><i className="material-icons">more_vert</i></MenuButton>]}/>
                 </div>
                 <div style={{flexGrow: "1", position: "relative"}}><TabStrip tabs={[
-                {id: "1", title: "Stuff", component:
+                {id: "1", title: <label>Stuff</label>, component:
                     <div>
                         <p><Button onClick={() => console.log("HR")}>Button</Button></p>
                         <p><Checkbox title="Wee"/></p>
@@ -50,7 +50,7 @@ waitForFonts(["Roboto", 'Material Icons'], () => {
                         <TextField placeholder="Hello" floatingLabel={true} value=""/>
                         <p><Slider min={0} max={100} value={50}/></p>
                     </div>},
-                {id: "2", title: "Load", component: 
+                {id: "2", title: <label>Load</label>, component: 
                     <div>
                         <p><Label>indeterminate</Label></p>
                         <p><ProgressBar progress={50} buffer={80} indeterminate={true}/></p>
@@ -60,7 +60,7 @@ waitForFonts(["Roboto", 'Material Icons'], () => {
                         <p><ProgressBar progress={50} buffer={80} /></p>
                         <p><Spinner/></p>
                     </div>},
-                {id: "3", title: "Split", component:
+                {id: "3", title: <label>Split</label>, component:
                     <SplitPane first={<div style={{backgroundColor: "#0f0", position: "absolute", width: "100%", height: "100%"}}/>} second={<div style={{backgroundColor: "#f00", position: "absolute", width: "100%", height: "100%"}}/>} axis="horizontal"/>}
                 ]} active="2"/></div>
             </div>
