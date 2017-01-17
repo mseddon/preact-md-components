@@ -5,7 +5,7 @@ import {globalRect} from "../domutil"
 import "./styles.less";
 import {RippleBox} from "./RippleBox";
 
-export class TabStrip extends Component<{tabs: {id: string, title: VNode, component: VNode}[], active: string, scrollable?: boolean, extraClasses?: string},{active: string}> {
+export class TabStrip extends Component<{tabs: {id: string, title: VNode, component: VNode}[], active: string, scrollable?: boolean, homogeneous?: boolean, extraClasses?: string, style?: "white" | "accent"},{active: string}> {
     elem: HTMLElement;
     tabElements: { [id: string]: HTMLElement } = {};
     tabComponents: { [id: string]: VNode } = {}
@@ -52,15 +52,16 @@ export class TabStrip extends Component<{tabs: {id: string, title: VNode, compon
 
     render() {
         return <div className={"md-tab-pane" + (this.props.extraClasses ? " "+this.props.extraClasses : "")}>
-                  <div ref={x => this.elem = x as HTMLDivElement} className={"md-tab-strip primary-bg" + (this.props.scrollable ? " scrollable" : "")}>
+                  <div ref={x => this.elem = x as HTMLDivElement} className={"md-tab-strip " + (this.props.style == "white" ? " white-bg" : " primary-bg") + (this.props.scrollable ? " scrollable" : "")}>
                     <i className="material-icons left-scroll">chevron_left</i>
                     <i className="material-icons right-scroll">chevron_right</i>
                     {this.props.tabs.map(child => 
                         <div ref={x => this.tabElements[child.id] = x as HTMLDivElement}
-                            className={"md-tab" + (child.id == this.state.active ? " is-active" : "")}
+                            className={"md-tab" + (child.id == this.state.active ? (" is-active" + (this.props.style == "white" ? " accent-fg" : "")) : "")}
+                            style={this.props.homogeneous ? "width: "+(100/this.props.tabs.length)+"%; text-align: center" : ""}
                             onMouseDown={this.selectTab(child.id)}
                             onTouchStart={this.selectTab(child.id)}>
-                            <RippleBox/>
+                            <RippleBox rippleClass={this.props.style == "white" ? "dark-ripple" : ""}/>
                             {child.title}</div>
                     )}<div ref={x=> this.indicator = x as HTMLDivElement} className="indicator accent-bg"/></div>
                   <div className="md-tab-content-area">
