@@ -5,16 +5,14 @@ import {globalRect} from "../domutil"
 import "./styles.less";
 import {RippleBox} from "./RippleBox";
 
-export class TabStrip extends Component<{tabs: {id: string, title: VNode, component: VNode}[], active: string, scrollable?: boolean, homogeneous?: boolean, extraClasses?: string, style?: "white" | "accent"},{active: string}> {
+export class TabStrip extends Component<{tabs: {id: string, title: VNode, component: VNode}[], active: string, scrollable?: boolean, homogeneous?: boolean, extraClasses?: string, style?: "white" | "accent"},{active: string, iLeft: number, iWidth: number}> {
     elem: HTMLElement;
     tabElements: { [id: string]: HTMLElement } = {};
     tabComponents: { [id: string]: VNode } = {}
-    indicator: HTMLElement;
-    scroller: HTMLElement;
 
     constructor(props) {
         super();
-        this.state = { active: props.active };
+        this.state = { active: props.active, iLeft: 0, iWidth: 0 };
     }
 
     update() {
@@ -22,13 +20,9 @@ export class TabStrip extends Component<{tabs: {id: string, title: VNode, compon
         let tabRect = globalRect(this.tabElements[this.state.active]);
 
         let left = tabRect.x-thisRect.x;
-        this.indicator.style.left = left+"px";
-        this.indicator.style.width = tabRect.width+"px";
-        for(let i=0; i<this.props.tabs.length; i++) {
-            if(this.props.tabs[i].id == this.state.active) {
-                this.scroller.style.left = -i*100+"%";
-            }
-        }
+        if(left != this.state.iLeft || tabRect.width != this.state.iWidth)
+            this.setState({...this.state, iLeft: left, iWidth: tabRect.width})
+
     }
 
     componentDidMount() {
@@ -40,13 +34,13 @@ export class TabStrip extends Component<{tabs: {id: string, title: VNode, compon
     }
 
     selectTab = (id: string) => (event: MouseEvent | TouchEvent ) => {
-        this.setState({active: id});
+        this.setState({...this.state, active: id});
     }
 
-    activeComponent() {
+    activePageIndex() {
         for(let i=0; i<this.props.tabs.length; i++) {
             if(this.props.tabs[i].id == this.state.active)
-                return this.props.tabs[i].component;
+                return i;
         }
     }
 
@@ -63,9 +57,9 @@ export class TabStrip extends Component<{tabs: {id: string, title: VNode, compon
                             onTouchStart={this.selectTab(child.id)}>
                             <RippleBox rippleClass={this.props.style == "white" ? "dark-ripple" : ""}/>
                             {child.title}</div>
-                    )}<div ref={x=> this.indicator = x as HTMLDivElement} className="indicator accent-bg"/></div>
+                    )}<div className="indicator accent-bg" style={{left: this.state.iLeft+"px", width: this.state.iWidth+"px"}}/></div>
                   <div className="md-tab-content-area">
-                    <div className="md-tab-scroller" ref={ x => this.scroller = x as HTMLDivElement }>
+                    <div className="md-tab-scroller" style={{left: -this.activePageIndex()*100+"%"}}>
                         {this.props.tabs.map((tab, i) => {                           
                             return <div className="md-tab-content" style={{left: (i*100)+"%"}}>{tab.component}</div>
                         })}

@@ -36,7 +36,7 @@ export class ResizeTrigger extends Component<{onResize: () => void}, {expandChil
         const parent = this.myElem.parentElement;
 
         if(getComputedStyle(parent).position == "static")
-            parent.style.position = "relative";
+            parent.style.position = "relative"; // *cringe*
 
         this.setState({ ...this.state,
             expandChildHeight: this.expand.offsetHeight+10,
