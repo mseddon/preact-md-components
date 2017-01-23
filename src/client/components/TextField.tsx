@@ -2,7 +2,7 @@ import { h, Component } from "preact";
 import "./styles.less";
 require('../theme');
 
-export class TextField extends Component<{placeholder: string, value: string, floatingLabel?: boolean, onInput?: (e: KeyboardEvent) => void, onKeyDown?: (e: KeyboardEvent) => void}, {focused: boolean, value: string}> {
+export class TextField extends Component<{placeholder: string, value: string, floatingLabel?: boolean, onInput?: (e: KeyboardEvent) => void, onKeyDown?: (e: KeyboardEvent) => void, onFocus?: (e: FocusEvent) => void, onBlur?: (e: FocusEvent) => void}, {focused: boolean, value: string}> {
     constructor(props) {
         super(props);
         this.setState({ focused: false, value: props.value });
@@ -14,12 +14,16 @@ export class TextField extends Component<{placeholder: string, value: string, fl
             this.props.onInput(e);
     }
 
-    private setFocus = (e: Event) => {
+    private setFocus = (e: FocusEvent) => {
         this.setState({...this.state, focused: true});
+        if(this.props.onFocus)
+            this.props.onFocus(e);
     }
 
-    private clearFocus = (e: Event) => {
+    private clearFocus = (e: FocusEvent) => {
         this.setState({...this.state, focused: false});
+        if(this.props.onBlur)
+            this.props.onBlur(e);
     }
 
     componentWillReceiveProps(props) {
