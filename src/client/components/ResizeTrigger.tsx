@@ -1,11 +1,12 @@
 import {h, Component } from "preact";
+import { globalRect } from "../domutil";
 
 /**
  * Triggers an onResize method every time it's parent component resizes.
  * 
  * This hack is INSANE, but robust as hell.
  */
-export class ResizeTrigger extends Component<{onResize: () => void}, {expandChildHeight: number, expandChildWidth: number, expandScrollLeft: number, expandScrollTop: number, contractScrollTop: number, contractScrollLeft: number, lastWidth: number, lastHeight: number}> {
+export class ResizeTrigger extends Component<{onResize: (globalRect: {x: number, y: number, width: number, height: number}) => void}, {expandChildHeight: number, expandChildWidth: number, expandScrollLeft: number, expandScrollTop: number, contractScrollTop: number, contractScrollLeft: number, lastWidth: number, lastHeight: number}> {
     myElem: HTMLElement;
     expand: HTMLElement;
     expandChild: HTMLElement;
@@ -66,7 +67,7 @@ export class ResizeTrigger extends Component<{onResize: () => void}, {expandChil
 
         const [width, height] = this.containerSize();
         if(width !== this.state.lastWidth || height !== this.state.lastHeight)
-            this.props.onResize();
+            this.props.onResize(globalRect(this.myElem));
         this.reset(width, height);
     }
 

@@ -9,17 +9,22 @@ export interface Rect {
     height: number
 }
 
-export class SplitPane extends Component<{first: VNode, second: VNode, axis: "horizontal" | "vertical", extraClasses?: string}, { splitPos: number, myRect: Rect, splitterRect: Rect }> {
+export class SplitPane extends Component<{first: VNode, second: VNode, axis: "horizontal" | "vertical", extraClasses?: string, onResize?: (first: Rect, second: Rect) => void}, { splitPos: number, myRect: Rect, splitterRect: Rect }> {
     myElem: HTMLElement;
     first: HTMLElement;
     second: HTMLElement;
     splitter: HTMLElement;
 
     dragOffset: number = 0;
+
+    prevFirst = {x: 0, y: 0, width: 0, height: 0};
+    prevSecond = {x: 0, y: 0, width: 0, height: 0};
+
     constructor() {
         super();
         this.state = { splitPos: 0.5, myRect: {x: 0, y: 0, width: 0, height: 0}, splitterRect: {x: 0, y: 0, width: 0, height: 0} }
     }
+
 
     xToValue(xPos: number) {
         let { x, y, width, height } = globalRect(this.myElem);
@@ -42,7 +47,6 @@ export class SplitPane extends Component<{first: VNode, second: VNode, axis: "ho
                 this.setState({...this.state, splitPos: this.xToValue(event.pageX)});
             else
                 this.setState({...this.state, splitPos: this.xToValue(event.changedTouches[0].pageX)});
-
         }
     }
 
@@ -92,7 +96,7 @@ export class SplitPane extends Component<{first: VNode, second: VNode, axis: "ho
                 splitterRect: { left: (w*splitPos)+"px"},
                 secondRect: { left: (w*splitPos+this.splitter.offsetWidth)+"px", width: (w*(1-splitPos))+"px" }
             }
-        }        
+        }
     }
 
     resizeChildren() {
@@ -101,6 +105,18 @@ export class SplitPane extends Component<{first: VNode, second: VNode, axis: "ho
 
     componentDidMount() {
         this.resizeChildren();
+    }
+
+    componentDidUpdate() {
+        if(this.props.onResize && this.first && this.second) {
+            let f = globalRect(this.first);
+            let s = globalRect(this.second);
+            if(f.x != this.prevFirst.x || f.y != this.prevFirst.y || f.width != this.prevFirst.width || f.height != this.prevFirst.height ||
+               s.x != this.prevSecond.x || s.y != this.prevSecond.y || s.width != this.prevSecond.width || s.height != this.prevSecond.height)
+                this.props.onResize(f, s);
+            this.prevFirst = f;
+            this.prevSecond = s;
+        }
     }
     
     render() {
