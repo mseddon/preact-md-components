@@ -20,9 +20,12 @@ export class SplitPane extends Component<{first: VNode, second: VNode, axis: "ho
     prevFirst = {x: 0, y: 0, width: 0, height: 0};
     prevSecond = {x: 0, y: 0, width: 0, height: 0};
 
+    splitterSize: number = 0;
+
     constructor() {
         super();
         this.state = { splitPos: 0.5, myRect: {x: 0, y: 0, width: 0, height: 0}, splitterRect: {x: 0, y: 0, width: 0, height: 0} }
+
     }
 
 

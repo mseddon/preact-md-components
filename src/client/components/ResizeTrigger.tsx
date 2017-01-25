@@ -62,7 +62,7 @@ export class ResizeTrigger extends Component<{onResize: (globalRect: {x: number,
     }
 
     handleScroll = () => {
-        if(typeof window === undefined)
+        if(typeof window === undefined || !this.myElem)
             return;
 
         const [width, height] = this.containerSize();
