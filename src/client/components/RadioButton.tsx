@@ -10,8 +10,13 @@ function updateCheck() {
     radios.forEach(r => { r.setState({...r.state, checked: r.elem.checked})});
 }
 
-export class RadioButton extends Component<{title: string, name: string, value: string}, {checked: boolean}> {
-    elem: HTMLInputElement
+export class RadioButton extends Component<{title: string, name: string, value: string, checked?: boolean}, {checked: boolean}> {
+    elem: HTMLInputElement;
+
+    constructor(props) {
+        super()
+        this.state = {checked: props.checked };
+    }
 
     componentDidMount() {
         radios.push(this);

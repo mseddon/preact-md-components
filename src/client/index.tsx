@@ -45,7 +45,7 @@ waitForFonts(["Roboto", 'Material Icons'], () => {
                         <p><Button onClick={() => console.log("HR")}>Button</Button></p>
                         <p><Checkbox title="Wee"/></p>
                         <p><Switch title="Wee" checked={true}/></p>
-                        <p><RadioButton name="buttons" title="Radio 1" value="1"/></p>
+                        <p><RadioButton name="buttons" title="Radio 1" value="1" checked={true} /></p>
                         <p><RadioButton name="buttons" title="Radio 2" value="2"/></p>
                         <TextField placeholder="Hello" floatingLabel={true} value=""/>
                         <p><Slider min={0} max={100} value={50}/></p>
