@@ -42,7 +42,7 @@ waitForFonts(["Roboto", 'Material Icons'], () => {
                 <div style={{flexGrow: "1", position: "relative"}}><TabStrip tabs={[
                 {id: "1", title: <label>Stuff</label>, component:
                     <div>
-                        <p><Button onClick={() => console.log("HR")}>Button</Button></p>
+                        <p><Button type="fab" onClick={() => console.log("HR")}><i className="material-icons">menu</i></Button></p>
                         <p><Checkbox title="Wee"/></p>
                         <p><Switch title="Wee" checked={true}/></p>
                         <p><RadioButton name="buttons" title="Radio 1" value="1" checked={true} /></p>
