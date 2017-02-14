@@ -66,8 +66,11 @@ export class ResizeTrigger extends Component<{onResize: (globalRect: {x: number,
             return;
 
         const [width, height] = this.containerSize();
-        if(Math.abs(width - this.state.lastWidth) > 0.001 || Math.abs(height - this.state.lastHeight) > 0.001)
-            this.props.onResize(globalRect(this.myElem));
+        if(Math.abs(width - this.state.lastWidth) > 0.001 || Math.abs(height - this.state.lastHeight) > 0.001) {
+            let rect = globalRect(this.myElem);
+            rect.x |= 0; rect.y |= 0; rect.width |= 0; rect.height |= 0;
+            requestAnimationFrame(() => this.props.onResize(rect)); // defer to avoid massive loop hell
+        }
         this.reset(width, height);
     }
 

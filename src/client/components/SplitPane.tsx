@@ -1,4 +1,6 @@
 import {h, Component, VNode } from "preact"
+import * as preact from "preact";
+
 import { globalRect } from "../domutil";
 import { ResizeTrigger } from "./ResizeTrigger";
 
@@ -85,19 +87,19 @@ export class SplitPane extends Component<{first: VNode, second: VNode, axis: "ho
         let myRect = this.state.myRect;
         let splitPos = this.state.splitPos;
         if(this.props.axis == "vertical") {
-            let h = myRect.height-this.splitter.offsetHeight;
+            let h = (myRect.height-this.splitter.offsetHeight)|0;
 
             return {
                 firstRect: {top: "0px", height: (h*splitPos)+"px"},
-                splitterRect: {top: (h*splitPos)+"px"},
-                secondRect: {height: (h*(1-splitPos))+"px", top: (h*splitPos+this.splitter.offsetHeight)+"px"}
+                splitterRect: {top: ((h*splitPos)|0)+"px"},
+                secondRect: {height: ((h*(1-splitPos))|0)+"px", top: ((h*splitPos+this.splitter.offsetHeight)|0)+"px"}
             }
         } else {
-            let w = myRect.width-this.splitter.offsetWidth;
+            let w = (myRect.width-this.splitter.offsetWidth)|0;
             return {
-                firstRect: {left: "0px", width: (w*splitPos)+"px"},
-                splitterRect: { left: (w*splitPos)+"px"},
-                secondRect: { left: (w*splitPos+this.splitter.offsetWidth)+"px", width: (w*(1-splitPos))+"px" }
+                firstRect: {left: "0px", width: ((w*splitPos)|0)+"px"},
+                splitterRect: { left: ((w*splitPos)|0)+"px"},
+                secondRect: { left: ((w*splitPos+this.splitter.offsetWidth)|0)+"px", width: ((w*(1-splitPos))|0)+"px" }
             }
         }
     }
@@ -114,11 +116,15 @@ export class SplitPane extends Component<{first: VNode, second: VNode, axis: "ho
         if(this.props.onResize && this.first && this.second) {
             let f = globalRect(this.first);
             let s = globalRect(this.second);
+            f.x |= 0; f.y |= 0; f.width |=0; f.height |= 0;
+            s.x |= 0; s.y |= 0; s.width |=0; s.height |= 0;
             if(Math.abs(f.x - this.prevFirst.x) > 0.001 || Math.abs(f.y - this.prevFirst.y) > 0.001 || Math.abs(f.width - this.prevFirst.width) > 0.001 || Math.abs(f.height - this.prevFirst.height) > 0.001 ||
-               Math.abs(s.x - this.prevSecond.x) > 0.001 || Math.abs(s.y - this.prevSecond.y) > 0.001 || Math.abs(s.width - this.prevSecond.width) > 0.001 || Math.abs(s.height - this.prevSecond.height) > 0.001)
-                this.props.onResize(f, s);
-            this.prevFirst = f;
-            this.prevSecond = s;
+               Math.abs(s.x - this.prevSecond.x) > 0.001 || Math.abs(s.y - this.prevSecond.y) > 0.001 || Math.abs(s.width - this.prevSecond.width) > 0.001 || Math.abs(s.height - this.prevSecond.height) > 0.001) {
+               this.prevFirst = f;
+               this.prevSecond = s;
+               
+               this.props.onResize(f, s);
+            }
         }
     }
     

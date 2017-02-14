@@ -10,6 +10,9 @@ export class TabStrip extends Component<{tabs: {id: string, title: VNode, compon
     tabElements: { [id: string]: HTMLElement } = {};
     tabComponents: { [id: string]: VNode } = {}
 
+    private iLeft: number;
+    private iWidth: number;
+
     constructor(props) {
         super();
         this.state = { active: props.active, iLeft: 0, iWidth: 0 };
@@ -20,8 +23,11 @@ export class TabStrip extends Component<{tabs: {id: string, title: VNode, compon
         let tabRect = globalRect(this.tabElements[this.state.active]);
 
         let left = tabRect.x-thisRect.x;
-        if(Math.abs(left - this.state.iLeft) > 0.001 || Math.abs(tabRect.width - this.state.iWidth) > 0.001)
+        if(Math.abs(left - this.iLeft) > 0.001 || Math.abs(tabRect.width - this.iWidth) > 0.001) {
+            this.iLeft = left;
+            this.iWidth = tabRect.width;
             this.setState({...this.state, iLeft: left, iWidth: tabRect.width})
+        }
 
     }
 
