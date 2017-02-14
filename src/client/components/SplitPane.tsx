@@ -114,8 +114,8 @@ export class SplitPane extends Component<{first: VNode, second: VNode, axis: "ho
         if(this.props.onResize && this.first && this.second) {
             let f = globalRect(this.first);
             let s = globalRect(this.second);
-            if(f.x != this.prevFirst.x || f.y != this.prevFirst.y || f.width != this.prevFirst.width || f.height != this.prevFirst.height ||
-               s.x != this.prevSecond.x || s.y != this.prevSecond.y || s.width != this.prevSecond.width || s.height != this.prevSecond.height)
+            if(Math.abs(f.x - this.prevFirst.x) > 0.001 || Math.abs(f.y - this.prevFirst.y) > 0.001 || Math.abs(f.width - this.prevFirst.width) > 0.001 || Math.abs(f.height - this.prevFirst.height) > 0.001 ||
+               Math.abs(s.x - this.prevSecond.x) > 0.001 || Math.abs(s.y - this.prevSecond.y) > 0.001 || Math.abs(s.width - this.prevSecond.width) > 0.001 || Math.abs(s.height - this.prevSecond.height) > 0.001)
                 this.props.onResize(f, s);
             this.prevFirst = f;
             this.prevSecond = s;

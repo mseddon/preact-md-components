@@ -66,7 +66,7 @@ export class ResizeTrigger extends Component<{onResize: (globalRect: {x: number,
             return;
 
         const [width, height] = this.containerSize();
-        if(width !== this.state.lastWidth || height !== this.state.lastHeight)
+        if(Math.abs(width - this.state.lastWidth) > 0.001 || Math.abs(height - this.state.lastHeight) > 0.001)
             this.props.onResize(globalRect(this.myElem));
         this.reset(width, height);
     }

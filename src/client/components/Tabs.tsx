@@ -20,7 +20,7 @@ export class TabStrip extends Component<{tabs: {id: string, title: VNode, compon
         let tabRect = globalRect(this.tabElements[this.state.active]);
 
         let left = tabRect.x-thisRect.x;
-        if(left != this.state.iLeft || tabRect.width != this.state.iWidth)
+        if(Math.abs(left - this.state.iLeft) > 0.001 || Math.abs(tabRect.width - this.state.iWidth) > 0.001)
             this.setState({...this.state, iLeft: left, iWidth: tabRect.width})
 
     }
