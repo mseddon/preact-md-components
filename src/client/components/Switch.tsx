@@ -3,7 +3,7 @@ import "./styles.less";
 import { RippleBox } from "./RippleBox";
 require('../theme');
 
-export class Switch extends Component<{title: string, checked?: boolean}, {checked: boolean}> {
+export class Switch extends Component<{title: string, checked?: boolean, onchange?: (boolean) => void}, {checked: boolean}> {
     elem: HTMLInputElement
 
     constructor(props) {
@@ -12,7 +12,8 @@ export class Switch extends Component<{title: string, checked?: boolean}, {check
     }
 
     updateCheck = () => {
-        this.setState({...this.state, checked: this.elem.checked})
+        this.setState({...this.state, checked: this.elem.checked});
+        this.props.onchange && this.props.onchange(this.elem.checked);
     }
 
     render() {
