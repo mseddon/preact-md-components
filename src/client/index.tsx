@@ -14,6 +14,7 @@ import { Spinner } from "./components/Spinner"
 import { Slider } from "./components/Slider"
 import { TabStrip } from "./components/Tabs"
 import { Menu, MenuItem, MenuSeparator } from "./components/Menu"
+import { Dialog } from "./components/Dialog"
 import { SplitPane } from "./components/SplitPane"
 import { waitForFonts } from "./domutil";
 import * as theme from "./theme";
@@ -33,7 +34,6 @@ waitForFonts(["Roboto", 'Material Icons'], () => {
                     <MenuItem label="Sign Out"/>
                 </Menu>
 
-
     render(<Toplevel>
                 <div style={{display: "flex", flexDirection: "column", position: "fixed", top: "0", left: "0", width: "100%", height: "100%"}}> 
                 <div style={{flexGrow: "0"}}>
@@ -48,6 +48,10 @@ waitForFonts(["Roboto", 'Material Icons'], () => {
                         <p><RadioButton name="buttons" title="Radio 1" value="1" checked={true} /></p>
                         <p><RadioButton name="buttons" title="Radio 2" value="2"/></p>
                         <TextField placeholder="Hello" floatingLabel={true} value=""/>
+                        <Dialog title="Dialog" show={false} buttons={[<Button type="flat" onClick={() => console.log("HR")}>Cancel</Button>,<Button type="flat" onClick={() => console.log("HR")}>Ok</Button>]}>
+                            <p>Funky muppet</p>
+                        </Dialog>
+                        <p><Button onClick={() => console.log("close")}>Dialog</Button></p>
                         <p><Slider min={0} max={100} value={50}/></p>
                     </div>},
                 {id: "2", title: <label>Load</label>, component: 
