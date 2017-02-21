@@ -74,6 +74,50 @@ body {
     box-shadow: 0 2px 5px rgba(0,0,0,.26);
 }
 
+.md-blackout{
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    z-index: 5;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+
+.md-dialog{
+    position: absolute;
+    background-color: #FFF;
+    padding: 12px;    
+    margin: 35px;
+    display: flex;
+    z-index: 6;
+    flex-direction: column;
+    h1{
+        display: inline-block;
+        padding: 0;
+        margin: 0;        
+        font-size: 18px;
+        line-height: 24px;
+        font-weight: normal;
+        vertical-align: middle;
+        padding-left: 12px;
+        color: #555; 
+    }
+    .md-dialog-content{
+        padding: 12px;
+    }
+
+    .right-icons {
+        padding-right: 12px;
+        margin-left: auto;
+        display: inline-block;
+    }
+    box-shadow: 0 2px 5px rgba(0,0,0,.26);
+}
+
 .md-field {
     max-width: 100%;
     position: relative;
