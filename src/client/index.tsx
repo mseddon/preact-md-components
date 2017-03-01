@@ -48,7 +48,7 @@ waitForFonts(["Roboto", 'Material Icons'], () => {
                         <p><RadioButton name="buttons" title="Radio 1" value="1" checked={true} /></p>
                         <p><RadioButton name="buttons" title="Radio 2" value="2"/></p>
                         <TextField placeholder="Hello" floatingLabel={true} value=""/>
-                        <Dialog title="Dialog" show={false} buttons={[<Button type="flat" onClick={() => console.log("HR")}>Cancel</Button>,<Button type="flat" onClick={() => console.log("HR")}>Ok</Button>]}>
+                        <Dialog title="Dialog" show={true} buttons={[<Button type="flat" onClick={() => console.log("HR")}>Cancel</Button>,<Button type="flat" onClick={() => console.log("HR")}>Ok</Button>]}>
                             <p>Funky muppet</p>
                         </Dialog>
                         <p><Button onClick={() => console.log("close")}>Dialog</Button></p>
