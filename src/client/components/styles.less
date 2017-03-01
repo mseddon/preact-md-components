@@ -93,35 +93,50 @@ body {
     line-height: 48px;
 }
 
-.md-dialog{
-    position: absolute;
-    background-color: #FFF;
-    padding: 12px;    
-    margin: 35px;
-    display: flex;
-    flex-direction: column;
-    h1{
-        display: inline-block;
-        padding: 0;
-        margin: 0;        
-        font-size: 18px;
-        line-height: 24px;
-        font-weight: normal;
-        vertical-align: middle;
-        padding-left: 12px;
-        color: #555; 
-    }
-    .md-dialog-content{
-        padding: 12px;
-    }
 
-    .right-icons {
-        padding-right: 12px;
-        margin-left: auto;
-        display: inline-block;
+.md-dialog-center{
+    position: fixed;
+    z-index: 5;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    .md-dialog{
+        position: absolute;
+        background-color: #FFF;
+        padding: 12px;    
+        margin: 35px;
+        display: flex;
+        flex-direction: column;
+        h1{
+            display: inline-block;
+            padding: 0;
+            margin: 0;        
+            font-size: 18px;
+            line-height: 24px;
+            font-weight: normal;
+            vertical-align: middle;
+            padding-left: 12px;
+            color: #555; 
+        }
+        .md-dialog-content{
+            padding: 12px;
+        }
+
+        .right-icons {
+            padding-right: 12px;
+            margin-left: auto;
+            display: inline-block;
+        }
+        box-shadow: 0 2px 5px rgba(0,0,0,.26);
     }
-    box-shadow: 0 2px 5px rgba(0,0,0,.26);
 }
+
+
 
 .md-field {
     max-width: 100%;
@@ -895,11 +910,6 @@ input:focus {
     z-index: 5;
     top: 0px;
     left: 0px;
-    bottom: 0px;
-    right: 0px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 #md-layer-menu {
