@@ -80,7 +80,6 @@ body {
     bottom: 0px;
     left: 0px;
     right: 0px;
-    z-index: 5;
     background-color: rgba(0, 0, 0, 0.7);
     display: flex;
     align-items: center;
@@ -100,7 +99,6 @@ body {
     padding: 12px;    
     margin: 35px;
     display: flex;
-    z-index: 6;
     flex-direction: column;
     h1{
         display: inline-block;
@@ -890,6 +888,18 @@ input:focus {
 .md-menu-separator {
     margin: 8px 0;
     border-bottom: 1px solid rgba(0,0,0,.12);
+}
+
+#md-layer-dialog{
+    position: fixed;
+    z-index: 5;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #md-layer-menu {
