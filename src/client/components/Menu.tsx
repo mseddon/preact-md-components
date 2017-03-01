@@ -2,7 +2,7 @@ import { h, Component, cloneElement } from "preact"
 import { RippleBox } from "./RippleBox";
 import { globalRect } from "../domutil";
 
-export class Menu extends Component<{x?: number, y?: number, width?: number, height?: number, closeMenu?: () => void}, {visible: boolean, x: number, y: number}> {
+export class Menu extends Component<{x?: number, y?: number, width?: number, height?: number, extraClasses?: string, closeMenu?: () => void}, {visible: boolean, x: number, y: number}> {
     myElem: HTMLElement
     constructor(props) {
         super();
@@ -25,7 +25,7 @@ export class Menu extends Component<{x?: number, y?: number, width?: number, hei
     }
 
     render({}, {visible}) {
-        return <div ref={x => this.myElem = x as HTMLElement} style={{ visibility: visible ? "visible" : "hidden", left: this.state.x+"px", top: this.state.y+"px"}} className="md-menu md-cascading-menu">
+        return <div ref={x => this.myElem = x as HTMLElement} style={{ visibility: visible ? "visible" : "hidden", left: this.state.x+"px", top: this.state.y+"px"}} className={"md-menu md-cascading-menu" +(this.props.extraClasses ? " "+this.props.extraClasses : "")}>
                     {this.props.children.map(c => cloneElement(c, { closeMenu: this.props.closeMenu }))}
                </div>
     }
