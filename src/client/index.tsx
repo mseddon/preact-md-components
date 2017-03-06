@@ -54,7 +54,7 @@ waitForFonts(["Roboto", 'Material Icons'], () => {
                         </Dialog>
                         <p><Button onClick={() => console.log("close")}>Dialog</Button></p>
                         <p><Slider min={0} max={100} value={50}/></p>
-                        <div style="display: flex;"><Chip label="this is a chip" /> <Chip img="https://avatars.slack-edge.com/2015-03-19/4112965323_b07b7ab3f92a618862f9_192.jpg" label="delete me" onDelete={() =>{}} /></div>
+                        <div style="display: flex;"><Chip label="this is a chip" /> <Chip img="https://avatars.slack-edge.com/2015-03-19/4112965323_b07b7ab3f92a618862f9_192.jpg" label="delete me" onDelete={() =>{alert("delete");}} /></div>
                     </div>},
                 {id: "2", title: <label>Load</label>, component: 
                     <div>
