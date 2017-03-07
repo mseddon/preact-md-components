@@ -12,6 +12,7 @@ import { RadioButton } from "./components/RadioButton"
 import { ProgressBar } from "./components/ProgressBar"
 import { Spinner } from "./components/Spinner"
 import { Slider } from "./components/Slider"
+import { Chip } from "./components/Chips"
 import { TabStrip } from "./components/Tabs"
 import { Menu, MenuItem, MenuSeparator } from "./components/Menu"
 import { Dialog } from "./components/Dialog"
@@ -48,11 +49,12 @@ waitForFonts(["Roboto", 'Material Icons'], () => {
                         <p><RadioButton name="buttons" title="Radio 1" value="1" checked={true} /></p>
                         <p><RadioButton name="buttons" title="Radio 2" value="2"/></p>
                         <TextField placeholder="Hello" floatingLabel={true} value=""/>
-                        <Dialog title="Dialog" show={true} buttons={[<Button type="flat" onClick={() => console.log("HR")}>Cancel</Button>,<Button type="flat" onClick={() => console.log("HR")}>Ok</Button>]}>
+                        <Dialog title="Dialog" show={false} buttons={[<Button type="flat" onClick={() => console.log("HR")}>Cancel</Button>,<Button type="flat" onClick={() => console.log("HR")}>Ok</Button>]}>
                             <p>Funky muppet</p>
                         </Dialog>
                         <p><Button onClick={() => console.log("close")}>Dialog</Button></p>
                         <p><Slider min={0} max={100} value={50}/></p>
+                        <div style="display: flex;"><Chip label="this is a chip" /> <Chip img="https://avatars.slack-edge.com/2015-03-19/4112965323_b07b7ab3f92a618862f9_192.jpg" label="delete me" onDelete={() =>{alert("delete");}} /></div>
                     </div>},
                 {id: "2", title: <label>Load</label>, component: 
                     <div>
