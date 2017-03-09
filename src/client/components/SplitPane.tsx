@@ -11,7 +11,7 @@ export interface Rect {
     height: number
 }
 
-export class SplitPane extends Component<{first: VNode, second: VNode, axis: "horizontal" | "vertical", extraClasses?: string, onResize?: (first: Rect, second: Rect) => void}, { splitPos: number, myRect: Rect, splitterRect: Rect }> {
+export class SplitPane extends Component<{first: VNode, second: VNode, axis: "horizontal" | "vertical", extraClasses?: string, onResize?: (first: Rect, second: Rect) => void, splitPos?: number, onSplitChange?: (pos: number) => void}, { splitPos: number, myRect: Rect, splitterRect: Rect }> {
     myElem: HTMLElement;
     first: HTMLElement;
     second: HTMLElement;
@@ -27,9 +27,12 @@ export class SplitPane extends Component<{first: VNode, second: VNode, axis: "ho
     constructor() {
         super();
         this.state = { splitPos: 0.5, myRect: {x: 0, y: 0, width: 0, height: 0}, splitterRect: {x: 0, y: 0, width: 0, height: 0} }
-
     }
 
+    componentWillReceiveProps(props) {
+        if(props.splitPos !== undefined)
+            this.setState({ ...this.state, splitPos: props.splitPos})
+    }
 
     xToValue(xPos: number) {
         let { x, y, width, height } = globalRect(this.myElem);
@@ -53,6 +56,8 @@ export class SplitPane extends Component<{first: VNode, second: VNode, axis: "ho
             else
                 this.setState({...this.state, splitPos: this.xToValue(event.changedTouches[0].pageX)});
         }
+        if(this.props.onSplitChange)
+            this.props.onSplitChange(this.state.splitPos);
     }
 
     startDrag = (event: MouseEvent | TouchEvent) => {
