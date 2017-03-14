@@ -5,6 +5,7 @@ require('../theme');
 export class TextField extends Component<
     {
         type?: "text" | "password" | "email" | "number" | "search" | "tel" | "url",
+        disabled?: boolean,
         placeholder: string, 
         value: string, 
         floatingLabel?: boolean, 
@@ -43,7 +44,7 @@ export class TextField extends Component<
 
     render() {
         return <div class={"md-field "+(this.props.floatingLabel ? "floating-label " : "")+ (this.state.focused ? " is-focused" : "") + (this.state.value !== "" ? " has-content" : "")}>
-                 <input type={this.props.type} value={this.state.value} onFocus={this.setFocus} onBlur={this.clearFocus} onInput={this.updateInput} onKeyDown={this.props.onKeyDown} className="text-primary"/>
+                 <input disabled={this.props.disabled} type={this.props.type} value={this.state.value} onFocus={this.setFocus} onBlur={this.clearFocus} onInput={this.updateInput} onKeyDown={this.props.onKeyDown} className="text-primary"/>
                  <label className={(this.state.value === "" ? "show-placeholder" : "no-placeholder") + ((this.state.focused || this.state.value !=="") ? " accent-fg": " hint-text")}>{this.props.placeholder}</label>
                  <span className="underline"/><span className="after accent-bg"></span>
                </div>
