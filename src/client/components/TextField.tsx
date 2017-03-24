@@ -12,7 +12,8 @@ export class TextField extends Component<
         onInput?: (e: KeyboardEvent) => void, 
         onKeyDown?: (e: KeyboardEvent) => void, 
         onFocus?: (e: FocusEvent) => void, 
-        onBlur?: (e: FocusEvent) => void
+        onBlur?: (e: FocusEvent) => void,
+        onClick?: (e: MouseEvent) => void
     }, {focused: boolean, value: string}> {
     constructor(props) {
         super(props);
@@ -43,7 +44,7 @@ export class TextField extends Component<
     }
 
     render() {
-        return <div class={"md-field "+(this.props.floatingLabel ? "floating-label " : "")+ (this.state.focused ? " is-focused" : "") + (this.state.value !== "" ? " has-content" : "")}>
+        return <div onClick={this.props.onClick} class={"md-field "+(this.props.floatingLabel ? "floating-label " : "")+ (this.state.focused ? " is-focused" : "") + (this.state.value !== "" ? " has-content" : "")}>
                  <input disabled={this.props.disabled} type={this.props.type} value={this.state.value} onFocus={this.setFocus} onBlur={this.clearFocus} onInput={this.updateInput} onKeyDown={this.props.onKeyDown} className="text-primary"/>
                  <label className={(this.state.value === "" ? "show-placeholder" : "no-placeholder") + ((this.state.focused || this.state.value !=="") ? " accent-fg": " hint-text")}>{this.props.placeholder}</label>
                  <span className="underline"/><span className="after accent-bg"></span>
