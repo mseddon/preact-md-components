@@ -34,7 +34,6 @@ export class ResizeTrigger extends Component<{onResize: (globalRect: {x: number,
     reset(width: number, height: number) {
         if(typeof window === "undefined")
             return; // in node.
-        const parent = this.myElem.parentElement;
 
         this.setState({ ...this.state,
             expandChildHeight: this.expand.offsetHeight+10,
