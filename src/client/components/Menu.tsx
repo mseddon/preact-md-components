@@ -43,7 +43,7 @@ export class MenuItem extends Component<{label: string, action?: () => void, clo
     }
 }
 
-export class MenuSeparator extends Component<void, void> {
+export class MenuSeparator extends Component<any, void> {
     render() {
         return <div className="md-menu-separator"/>
     }

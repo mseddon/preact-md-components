@@ -1,6 +1,6 @@
 import { h, Component } from "preact"
 
-export class Toplevel extends Component<void, void> {
+export class Toplevel extends Component<any, void> {
     render() {
         return <div id="md-content">
                    <div id="md-layer-content">{this.props.children}</div>
