@@ -26,7 +26,7 @@ export class Menu extends Component<{x?: number, y?: number, width?: number, hei
 
     render({}, {visible}) {
         return <div ref={x => this.myElem = x as HTMLElement} style={{ visibility: visible ? "visible" : "hidden", left: this.state.x+"px", top: this.state.y+"px"}} className={"md-menu md-cascading-menu" +(this.props.extraClasses ? " "+this.props.extraClasses : "")}>
-                    {this.props.children.map(c => cloneElement(c, { closeMenu: this.props.closeMenu }))}
+                    {this.props.children.filter(s => !!s).map(c => cloneElement(c, { closeMenu: this.props.closeMenu }))}
                </div>
     }
 }
