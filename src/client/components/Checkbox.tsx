@@ -3,7 +3,7 @@ import "./styles.less";
 import { RippleBox } from "./RippleBox";
 require('../theme');
 
-export class Checkbox extends Component<{title: string, checked?: boolean}, {checked: boolean}> {
+export class Checkbox extends Component<{title: string, checked?: boolean, onChange?: () => any}, {checked: boolean}> {
     elem: HTMLInputElement
 
     constructor(props) {
@@ -11,12 +11,17 @@ export class Checkbox extends Component<{title: string, checked?: boolean}, {che
         this.state = {checked: props.checked};
     }
 
-    componentDidReceiveProps() {
-        this.setState({...this.state, checked: this.props.checked})
+    componentWillReceiveProps(props: {title: string, checked?: boolean}) {
+        console.log(this.state.checked+" -> "+props.checked);
+        this.setState({...this.state, checked: props.checked})
+        console.log(this.state.checked+" -> "+props.checked);
+        console.log("---");
     }
 
     updateCheck = () => {
         this.setState({...this.state, checked: this.elem.checked})
+        if(this.props.onChange)
+            this.props.onChange();
     }
 
     render() {
