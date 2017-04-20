@@ -12,10 +12,7 @@ export class Checkbox extends Component<{title: string, checked?: boolean, onCha
     }
 
     componentWillReceiveProps(props: {title: string, checked?: boolean}) {
-        console.log(this.state.checked+" -> "+props.checked);
         this.setState({...this.state, checked: props.checked})
-        console.log(this.state.checked+" -> "+props.checked);
-        console.log("---");
     }
 
     updateCheck = () => {
