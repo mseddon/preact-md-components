@@ -9,7 +9,11 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "preact": "8.1.0",
+    "preact-portal": "1.1.1",
+    "preact-router": "2.5.1"
+  },
   "peerDependencies": {
     "preact": "*",
     "preact-portal": "*",
