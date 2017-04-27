@@ -110,7 +110,8 @@ export class SplitPane extends Component<{first: VNode, second: VNode, axis: "ho
     }
 
     resizeChildren() {
-        this.setState({...this.state, myRect: globalRect(this.myElem), splitterRect: globalRect(this.splitter)})
+        if(this.myElem && this.splitter)
+            this.setState({...this.state, myRect: globalRect(this.myElem), splitterRect: globalRect(this.splitter)})
     }
 
     componentDidMount() {
