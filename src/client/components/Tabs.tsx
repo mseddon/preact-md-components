@@ -5,7 +5,7 @@ import {globalRect} from "../domutil"
 import "./styles.less";
 import {RippleBox} from "./RippleBox";
 
-export class TabStrip extends Component<{tabs: {id: string, title: VNode, component: VNode}[], active: string, scrollable?: boolean, homogeneous?: boolean, extraClasses?: string, style?: "white" | "accent"},{active: string, iLeft: number, iWidth: number}> {
+export class TabStrip extends Component<{tabs: {id: string, title: VNode, component: VNode}[], onActiveTabChange?: (id: string) => void, active: string, scrollable?: boolean, homogeneous?: boolean, extraClasses?: string, style?: "white" | "accent"},{active: string, iLeft: number, iWidth: number}> {
     elem: HTMLElement;
     tabElements: { [id: string]: HTMLElement } = {};
     tabComponents: { [id: string]: VNode } = {}
@@ -41,6 +41,7 @@ export class TabStrip extends Component<{tabs: {id: string, title: VNode, compon
 
     selectTab = (id: string) => (event: MouseEvent | TouchEvent ) => {
         this.setState({...this.state, active: id});
+        if(this.props.onActiveTabChange)this.props.onActiveTabChange(id)
     }
 
     activePageIndex() {
