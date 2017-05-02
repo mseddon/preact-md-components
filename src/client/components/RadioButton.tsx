@@ -7,7 +7,7 @@ require('../theme');
 let radios: RadioButton[] = [];
 
 function updateCheck() {
-    radios.forEach(r => { r.setState({...r.state, checked: r.elem.checked})});
+    radios.forEach(r => { r.elem && r.setState({...r.state, checked: r.elem.checked})});
 }
 
 export class RadioButton extends Component<{title: string, name: string, value: string, checked?: boolean, onClick?: (MouseEvent) => void}, {checked: boolean}> {
