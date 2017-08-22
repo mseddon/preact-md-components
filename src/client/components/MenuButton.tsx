@@ -5,7 +5,7 @@ import { globalRect } from "../domutil";
 import { RippleBox } from "./RippleBox"
 require('../theme');
 
-export class MenuButton extends Component<{menu: VNode}, { open: boolean }> {
+export class MenuButton extends Component<{menu: VNode, dontNudge?: boolean, extraClasses?: string}, { open: boolean }> {
     myElem: HTMLElement;
 
     myBox = { x: 0, y: 0, width: 0, height: 0}
@@ -18,7 +18,10 @@ export class MenuButton extends Component<{menu: VNode}, { open: boolean }> {
     click = e => {
         e.preventDefault();
         this.myBox = globalRect(this.myElem);
-        this.myBox.x += this.myBox.width;
+        if(!this.props.dontNudge)
+            this.myBox.x += this.myBox.width;
+        else
+            this.myBox.y -= this.myBox.height;
         this.myBox.width = 0;
         this.setState({open: true})
     }
@@ -32,7 +35,7 @@ export class MenuButton extends Component<{menu: VNode}, { open: boolean }> {
     }
 
     render() {
-        return <div ref={x => this.myElem = x as HTMLElement} class="md-icon-button" aria-role="button" onMouseDown={this.click} onTouchEnd={this.click}>
+        return <div ref={x => this.myElem = x as HTMLElement} class={"md-icon-button" + this.props.extraClasses ? (" "+this.props.extraClasses) : ""} aria-role="button" onMouseDown={this.click} onTouchEnd={this.click}>
                    {this.props.children}
                    <RippleBox extraClasses="ripple-icon"/>
                    {
