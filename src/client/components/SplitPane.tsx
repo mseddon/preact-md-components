@@ -4,6 +4,14 @@ import * as preact from "preact";
 import { globalRect } from "../domutil";
 import { ResizeTrigger } from "./ResizeTrigger";
 
+let eventMaskElement = document.createElement("div");
+eventMaskElement.style.position = "fixed";
+eventMaskElement.style.left = "0";
+eventMaskElement.style.right = "0";
+eventMaskElement.style.top = "0";
+eventMaskElement.style.bottom = "0";
+eventMaskElement.style.zIndex = "1000";
+
 export interface Rect {
     x: number;
     y: number;
@@ -62,6 +70,7 @@ export class SplitPane extends Component<{first: VNode, second: VNode, axis: "ho
 
     startDrag = (event: MouseEvent | TouchEvent) => {
         event.preventDefault();
+        document.body.appendChild(eventMaskElement);
         let splitRect = globalRect(this.splitter);
         if(event instanceof MouseEvent) {
             this.dragOffset = this.props.axis == "vertical" ? event.pageY-splitRect.y : event.pageX-splitRect.x;
@@ -79,6 +88,7 @@ export class SplitPane extends Component<{first: VNode, second: VNode, axis: "ho
         window.removeEventListener("mousemove", this.onDrag);
         window.removeEventListener("touchend", this.endDrag);
         window.removeEventListener("touchmove", this.onDrag);
+        document.body.removeChild(eventMaskElement);
     }
 
     computeSizes() {
