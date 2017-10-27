@@ -35,7 +35,7 @@ export class MenuButton extends Component<{menu: VNode, dontNudge?: boolean, ext
     }
 
     render() {
-        return <div ref={x => this.myElem = x as HTMLElement} class={"md-icon-button" + this.props.extraClasses ? (" "+this.props.extraClasses) : ""} aria-role="button" onMouseDown={this.click} onTouchEnd={this.click}>
+        return <div ref={x => this.myElem = x as HTMLElement} class={"md-icon-button" + (this.props.extraClasses ? (" "+this.props.extraClasses) : "")} aria-role="button" onMouseDown={this.click} onTouchEnd={this.click}>
                    {this.props.children}
                    <RippleBox extraClasses="ripple-icon"/>
                    {
