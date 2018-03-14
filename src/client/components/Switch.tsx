@@ -8,7 +8,10 @@ export class Switch extends Component<{title: string, checked?: boolean, onchang
 
     constructor(props) {
         super();
-        this.state = {checked: props.checked};
+    }
+
+    componentWillReceiveProps(props) {
+        this.setState({checked: props.checked});
     }
 
     updateCheck = () => {

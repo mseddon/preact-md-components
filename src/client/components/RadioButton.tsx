@@ -18,6 +18,10 @@ export class RadioButton extends Component<{title: string, name: string, value: 
         this.state = {checked: props.checked };
     }
 
+    componentWillReceiveProps(props) {
+        this.setState({checked: props.checked});
+    }
+    
     componentDidMount() {
         radios.push(this);
     }
